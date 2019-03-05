@@ -1,0 +1,78 @@
+# Intro
+
+In this tutorial you will learn how to build a chatbot using Kinvey Chat. You will follow a series of steps, which will guide you through various aspects of building a fully featured chatbot.
+
+## Background
+
+You will build a chatbot for a car rental company.
+We will make a number of simplifications, for example: we will assume that each city can only have one rental office. However, the general idea should be fairly accurate with what you would expect from a real chatbot.
+
+As the backend, we will use an instance of [Kinvey Database](https://www.progress.com/kinvey), which will come with some data and cloud functions that will aid you with the process. 
+
+### Postman
+
+The tutorial will introduce each data collection and cloud function as we go.
+
+If you are curious and would like to preview the data, you need to make a **GET** request and pass in an **authentication** key, which means that you can't just paste the URL in your browser to get the data.
+
+In order to get a glimpse of the data or test out the cloud functions, you could use an application like [Postman](https://www.getpostman.com/). Here is a [getting started guide for Postman](https://learning.getpostman.com/getting-started/).
+
+## Login/Registration
+
+First you need to [log in to Kinvey Chat Portal](https://portal.nativechat.com/login) and if you don't have an account yet, then you can [register one here](https://portal.nativechat.com/register). 
+
+## Creating a project
+
+From the Chat portal, create a new project (by pressing the big plus button), select a **Blank bot** template, call it **Car Rental**, and press **Create**.
+
+![Create a bot](./img/create-bot.png?raw=true)
+
+### Understanding a conversation structure
+
+Although, the template you used is the **Blank bot**, you will find that there is already some code in the **Cognitive Flow** tab.
+
+You will probably notice that the code is in a JSON format. That is correct, Kinvey Chat uses a declarative approach, where you describe what you want the chatbot to handle, and the chatbot engine manages the process for you.
+
+The chatbot contains configurations: 
+
+* `welcome` - what to do when a user starts a new session,
+* `help` - what to do when a user types **help** or when it gets stuck
+* `restart` - what to do after the user asks to **restart**
+* `conversationOne` and `conversationTwo` - two super basic conversations
+* `settings` - general project settings - currently used for default messages,
+* `commands` - commands that allow the user to restart a conversation or to ask for the next batch of items.
+
+Let's have a look at **conversationOne**:
+
+```json
+"conversationOne": {
+  "type": "goal",
+  "display-name": "conversation 1",
+  "steps": [
+    {
+      "type": "message",
+      "messages": [
+        [
+          "This is conversation 1"
+        ]
+      ]
+    }
+  ]
+},
+```
+
+Whenever this conversation kicks in, the chatbot responds with a simple text "This is conversation 1" and then it completes.
+
+## Testing the default conversation
+
+This is enough to test the chatbot. 
+
+1. Press the **Test** button, which will open a chatbot in a new window.
+2. Type: **Conversation 1** and press enter
+3. See the response
+4. See the conversation log, which shows the understanding from the chatbot engine - we will dive deeper into it later
+5. Type **restart** and try again...
+
+![Test](./img/test-conversation-1.png?raw=true)
+
+> Note, that you don't have to restart close this window and open it again each time you make changes to your chatbot. Usually it is enough to **save** the chatbot and type **restart** for the chatbot to use the latest update.
