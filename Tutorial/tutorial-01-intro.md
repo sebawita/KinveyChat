@@ -33,7 +33,9 @@ Even as you progress through the tutorial and feel like you have already complet
 
 ## Login/Registration
 
-First you need to [log in to Kinvey Chat Portal](https://portal.nativechat.com/login) and if you don't have an account yet, then you can [register one here](https://portal.nativechat.com/register). 
+First you need to sing in with your **Kinvey Account** to [Kinvey Chat Portal](https://bots.kinvey.com/login).
+
+If you don't have a **Kinvey Account** yet, you can [create one here](https://console.kinvey.com/sign-up). 
 
 ## Creating a project
 
