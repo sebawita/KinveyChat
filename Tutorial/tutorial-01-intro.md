@@ -17,6 +17,20 @@ If you are curious and would like to preview the data, you need to make a **GET*
 
 In order to get a glimpse of the data or test out the cloud functions, you could use an application like [Postman](https://www.getpostman.com/). Here is a [getting started guide for Postman](https://learning.getpostman.com/getting-started/).
 
+## The Structure of the tutorial
+
+This tutorial is structured in a slightly different way to how you would actually go about building a chatbot. Usually you would add all the required features each time you add a new conversation step.
+
+However, in order to make things simpler and easier to understand, the tutorial is divided in a number of chapters where each introduces a new concept and expands on the existing chatbot project.
+
+## Type Type Type
+
+It is important that you **type each piece of code yourself** and **don't copy & paste solutions** unless you are really stuck.
+
+Typing will help you get used to the process, syntax and the structure of the project. While copy and paste is good to see how something works, before you forget it all. So, if you want to really learn: type, type, type it all.
+
+Even as you progress through the tutorial and feel like you have already completed a similar task and that you can just copy & paste and tweak what needs changing, even (or especially) then try to go through the process and build each piece of the chatbot.
+
 ## Login/Registration
 
 First you need to [log in to Kinvey Chat Portal](https://portal.nativechat.com/login) and if you don't have an account yet, then you can [register one here](https://portal.nativechat.com/register). 
