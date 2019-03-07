@@ -191,7 +191,7 @@ It is time for you to create your second entity for **City**:
 
 1. Open the **Training** tab
 2. Press **Add new**
-3. Set the `Name` to: **Country**
+3. Set the `Name` to: **City**
 4. Keep the `Lookup strategy` as **Keyword**
 5. Set the `Traning Data Source` to **Dynamic**
 6. Provide the following configuration:
@@ -199,7 +199,7 @@ It is time for you to create your second entity for **City**:
 	* `Headers`:
 		* `key`: **Authorization**
 		* `value`: **Basic a2lkX3IxMjc1dl9INDo5YWYxOTcxZTFlY2U0NTNhYWUwOTQ2MzZlYmM5MGJlNw==**
-	* `Value template`: **{{city}}**
+	* `Value template`: **{{name}}**
 	* `Synonym templates`: **{{localName}}**
 7. Press **Test**
   * This should return an array with a list of city names
@@ -210,13 +210,13 @@ It is time for you to create your second entity for **City**:
 You might be wondering about the syntax used for the Value template: `{{city}}`.
 Kinvey Chat uses Mustache template system, which allows mixing text with values returned from an object.
 
-For example, a template `City: {{city}}`, would return an array of items like:
+For example, a template `City: {{name}}`, would return an array of items like:
 
 ```json
 [ "City: Naples", "City: Lyon", "City: Gdansk", ...]
 ```
 
-You can also use this with any text returned by the chatbot. For example, you could have a message step like this:
+You can also use this with any message text returned by the chatbot. For example, you could have a message step like this:
 
 ```json
 {
