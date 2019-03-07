@@ -1,0 +1,80 @@
+[
+  {
+    "id": "car01",
+    "name": "BMW 5 Series",
+    "short-name": "BMW",
+    "hasAC": true,
+    "seats": "2",
+    "luggage": 3,
+    "class": "Luxury",
+    "doors": 2,
+    "price": 76,
+    "transmission": "Automatic",
+    "imageUrl": "https://storage.googleapis.com/f951c6deade64ba687d0b8ea8421be56/fc037959-6585-4757-8a0f-76a7d94a5029/BMW-5-Series.jpg"
+  },
+  {
+    "id": "car02",
+    "name": "Ford KA",
+    "short-name": "Ford",
+    "hasAC": false,
+    "seats": "4 + 1",
+    "luggage": 3,
+    "class": "Luxury",
+    "doors": 5,
+    "price": 44,
+    "transmission": "Automatic",
+    "imageUrl": "https://storage.googleapis.com/f951c6deade64ba687d0b8ea8421be56/f4e2f6ac-7f06-4493-9c55-525269cb8f6b/Ford-KA.jpg"
+  },
+  {
+    "id": "car03",
+    "name": "Kia Sorento",
+    "short-name": "Kia",
+    "hasAC": true,
+    "seats": "4 + 1",
+    "luggage": 2,
+    "class": "Standard",
+    "doors": 5,
+    "price": 45,
+    "transmission": "Manual",
+    "imageUrl": "https://storage.googleapis.com/f951c6deade64ba687d0b8ea8421be56/6ee28744-2fa1-4f0c-b8e9-c6ed9aa89ef2/Kia-Sorento.jpg"
+  },
+  {
+    "id": "car04",
+    "name": "Mazda MX-5",
+    "short-name": "Mazda",
+    "hasAC": true,
+    "seats": "2",
+    "luggage": 2,
+    "class": "Luxury",
+    "doors": 3,
+    "price": 53,
+    "transmission": "Automatic",
+    "imageUrl": "https://storage.googleapis.com/f951c6deade64ba687d0b8ea8421be56/b9e8761a-c6f5-42ba-b6ac-e691a7a308df/Mazda-MX-5.jpg"
+  },
+  {
+    "id": "car05",
+    "name": "Mercedes S-Class Cabriolet",
+    "short-name": "Mercedes",
+    "hasAC": false,
+    "seats": "4",
+    "luggage": 2,
+    "class": "Luxury",
+    "doors": 3,
+    "price": 89,
+    "transmission": "Manual",
+    "imageUrl": "https://storage.googleapis.com/f951c6deade64ba687d0b8ea8421be56/b7131b11-85bc-4faa-94e0-531cbc4bfdb6/Mercedes-S-Class-Cabriolet.jpg"
+  },
+  {
+    "id": "car06",
+    "name": "Smart",
+    "short-name": "Smart",
+    "hasAC": true,
+    "seats": "2",
+    "luggage": 1,
+    "class": "Mini",
+    "doors": 2,
+    "price": 39,
+    "transmission": "Manual",
+    "imageUrl": "https://storage.googleapis.com/f951c6deade64ba687d0b8ea8421be56/0e239200-d17d-4a2d-8b0d-92af84853384/Smart.jpg"
+  }
+]

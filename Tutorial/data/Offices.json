@@ -1,0 +1,62 @@
+[
+  {
+    "country": "Italy",
+    "name": "Venice",
+    "localName": "Venezia"
+  },
+  {
+    "country": "France",
+    "name": "Paris",
+    "localName": "Paris"
+  },
+  {
+    "country": "Germany",
+    "name": "Berlin",
+    "localName": "Berlin"
+  },
+  {
+    "country": "France",
+    "name": "Lyon",
+    "localName": "Lyons"
+  },
+  {
+    "country": "Italy",
+    "name": "Naples",
+    "localName": "Napoli"
+  },
+  {
+    "country": "Germany",
+    "name": "Munich",
+    "localName": "München"
+  },
+  {
+    "country": "Italy",
+    "name": "Rome",
+    "localName": "Roma"
+  },
+  {
+    "country": "Germany",
+    "name": "Hanover",
+    "localName": "Hannover"
+  },
+  {
+    "country": "Poland",
+    "name": "Cracow",
+    "localName": "Kraków"
+  },
+  {
+    "country": "Poland",
+    "name": "Gdansk",
+    "localName": "Gdańsk"
+  },
+  {
+    "country": "Poland",
+    "name": "Warsaw",
+    "localName": "Warszawa"
+  },
+  {
+    "country": "France",
+    "name": "Marseille",
+    "localName": "Marseilles"
+  }
+]
