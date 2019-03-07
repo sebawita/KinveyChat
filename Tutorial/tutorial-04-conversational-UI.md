@@ -353,7 +353,7 @@ Add these steps before the **Country** step, so that the chatbot would start by 
 ### Add the pick-up Date question
 For the first question step, set:
 
-* **Entity** to `pickUp`,
+* **Entity** to `startDate`,
 * **Entity Type** to `Date`
 * The **Prompt message** to `When would you like to pick up the car?`
 
@@ -373,7 +373,7 @@ Then add a display configuration like this one:
 ### Add the drop-off Date question
 Add the second question step after the first one, set:
 
-* The **Entity** to `dropOff`
+* The **Entity** to `endDate`
 * The **Prompt message** to `When would you like to drop off the car?`
 * The **Button text to show the calendar** to `Find drop-off date`
 
@@ -384,7 +384,7 @@ The two steps should look like this:
 ```json
 {
   "type": "question",
-  "entity": "pickUp",
+  "entity": "startDate",
   "entity-type": "Date",
   "messages": [
     "When would you like to pick up the car?"
@@ -400,7 +400,7 @@ The two steps should look like this:
 ```json
 {
   "type": "question",
-  "entity": "dropOff",
+  "entity": "endDate",
   "entity-type": "Date",
   "messages": [
     "When would you like to drop off the car?"
@@ -495,7 +495,7 @@ In the second step, just print the following message in 3 lines:
 
 ### Solution
 
-Here is the full code for the `drop-off-location` conversation.
+Here is the full code for the `drop-off-location` conversation:
 
 ```json
 "drop-off-location": {
