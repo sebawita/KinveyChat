@@ -34,7 +34,7 @@ Select the `conversation-goal` snippet and press enter. This should output the f
 }
 ```
 
-Set `"conversation-name"` to `"what-weather"`.
+Change `"conversation-name"` to `"what-weather"`.
 
 Next you need to add a **message step** to the conversation.
 
@@ -51,7 +51,7 @@ From inside the `steps[]` array, start typing `step` and select the `step-messag
 }
 ```
 
-Add few messages to the `messages[]` array. For example:
+Add a few messages to the `messages[]` array. For example:
 
 ```json
 {
@@ -66,7 +66,7 @@ Add few messages to the `messages[]` array. For example:
 
 > Please note that adding multiple messages means that the chatbot can respond with one of these messages. So that if the user gets to the same step, the chatbot might respond with a slightly different text.
 > 
-> If you want to respond with multiple messages, just add an array of messages, like this:
+> If you want to respond with multiple, separate, messages, just add an array of messages, like this:
 > 
 > ```json
 >"messages": [
@@ -105,6 +105,8 @@ Here is how I did it:
 
 ![](./img/whatWeather.gif?raw=true)
 
+Make sure to **save** your changes before proceeding.
+
 ### Train the chatbot to recognise the New Conversation
 <!--Synonyms and stuff-->
 
@@ -112,26 +114,17 @@ Now, you need to train the chatbot to recognise the New Conversation.
 
 This is done in the **Training** tab, through the built-in **Conversations** collection.
 
-Navigate to the **Training** tab, open **Conversations**, and press **Add value**.
+Navigate to the **Training** tab, open **Conversation**, and press **Add value**.
 
 The `Value` is the name of the conversation JSON object. 
 The `Expressions` is a list of expressions that should trigger the conversation.
 
-Set the value to: `what-weater`.
+Set the value to: `what-weather`.
 
-```json
-"what-weather": {
-	/\
-	||
-conversation name
-  ...
-},
-```
+Next add the following expressions, one at a time:
 
-Next add the following expressions:
-
-* *"What is the weather like?"*
-* *"How does it look outside?"*
+* *What is the weather like?*
+* *How does it look outside?*
 
 And press **Save**.
 
@@ -199,4 +192,4 @@ The conversation should start when the user types:
 * "I want to rent a car"
 * "Do you have a car in?"
 
-And the chatbot should respond with: "Great, let me help you find a car for you."
+And the chatbot should respond with: "Great, let me help find a car for you."
