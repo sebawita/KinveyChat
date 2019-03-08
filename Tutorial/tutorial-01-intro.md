@@ -1,13 +1,12 @@
 # Intro
 
-In this tutorial you will learn how to build a chatbot using Kinvey Chat. You will follow a series of steps, which will guide you through various aspects of building a fully featured chatbot.
+In this tutorial you will learn how to build a chatbot using [Kinvey Chat](https://www.progress.com/kinvey/chat). You will follow a series of steps, which will guide you through various aspects of building a fully featured chatbot.
 
 ## Background
 
-You will build a chatbot for a car rental company.
-We will make a number of simplifications, for example: we will assume that each city can only have one rental office. However, the general idea should be fairly accurate with what you would expect from a real chatbot.
+You will build a chatbot for a car rental company. We will make a number of simplifications, for example: we will assume that each city can only have one rental office. However, the general idea should be fairly accurate with what you would expect from a real chatbot.
 
-As the backend, we will use an instance of [Kinvey Database](https://www.progress.com/kinvey), which will come with some data and cloud functions that will aid you with the process. 
+As the backend, we will use an instance of the [Progress Kinvey serverless backend](https://www.progress.com/kinvey), which will come with some data and cloud functions that will aid you with the process. 
 
 ### Postman
 
@@ -33,7 +32,7 @@ Even as you progress through the tutorial and feel like you have already complet
 
 ## Login/Registration
 
-First you need to sing in with your **Kinvey Account** to [Kinvey Chat Portal](https://bots.kinvey.com/login).
+First you need to sign in with your **Kinvey Account** to [Kinvey Chat Portal](https://bots.kinvey.com/login).
 
 If you don't have a **Kinvey Account** yet, you can [create one here](https://console.kinvey.com/sign-up). 
 
@@ -45,7 +44,7 @@ From the Chat portal, create a new project (by pressing the big plus button), se
 
 ### Understanding a conversation structure
 
-Although, the template you used is the **Blank bot**, you will find that there is already some code in the **Cognitive Flow** tab.
+Although the template you used is the **Blank bot**, you will find that there is already some code in the **Cognitive Flow** tab.
 
 You will probably notice that the code is in a JSON format. That is correct, Kinvey Chat uses a declarative approach, where you describe what you want the chatbot to handle, and the chatbot engine manages the process for you.
 
