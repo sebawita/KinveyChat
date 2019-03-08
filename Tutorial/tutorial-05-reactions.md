@@ -431,7 +431,7 @@ Implementing this validation is quite simple, you need to:
 9. Update the `error-message`
 
   ```json
-  "Unfortunatelly, this {{car}} is not available in {{city}}. Try another car."
+  "Unfortunatelly, {{car}} is not available in {{city}}. Try another car."
   ```
   
 10. Here is how the whole reaction should look like:
@@ -456,7 +456,7 @@ Implementing this validation is quite simple, you need to:
             }
           },
           "error-message": [
-            "Unfortunatelly, this {{car}} is not available in {{city}}. Try another car."
+            "Unfortunatelly, {{car}} is not available in {{city}}. Try another car."
           ]
         }
       ]
@@ -467,16 +467,23 @@ Implementing this validation is quite simple, you need to:
 
 Now you should be able to test car validation of the `rent-car` conversation.
 
-##### Berlin
+> To skip the steps for dates, you can start with an expression like: *"Rent a car from today to tomorrow"*
 
-Select **Berlin** as the city.
-Then if you select **BMW 5 Series** or **Ford KA** you should get an error message. Selecting any other car should work fine.
+1. Send: *Rent a car from today to tomorrow in Germany*
+2. Select **Berlin**
+3. Select **BMW 5 Series** or **Ford KA** => you should get an error message.
+4. Select any other car => this should work fine.
 
+![](./img/car-validation-demo.gif?raw=true)
+
+<!--
 ##### Venice
 
-Select **Venice** as the city.
-Then if you select **Kia Sorento** or **Mazda MX-5** you should get an error message.
-
+1. Send: *Rent a car from today to tomorrow in Italy*
+2. Select **Venice**
+3. Select **Kia Sorento** or **Mazda MX-5** => you should get an error message.
+4. Select any other car => it should work fine.
+-->
 
 ## Ambiguities
 
