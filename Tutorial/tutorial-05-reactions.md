@@ -617,11 +617,7 @@ Add a question step to collect an email address with:
 
 * acknowledgment message
 * email validation
-
-<!--
-* ambiguity resolver
 * suggestions
--->
 
 ### Advanced: Add picture capture to the `drop-off-location` conversation
 
