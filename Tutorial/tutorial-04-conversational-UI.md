@@ -16,7 +16,14 @@ It displays available answers as a set of buttons. It allows the user to click o
 
 ### Add Quick Reply to the Country Step
 
-In the Cognitive Flow tab, find the **Country** step and add the following piece of code:
+Add **Quick Reply** to the **Country** step, like this:
+
+1. Find the **Country** step and go to the end of the step
+2. Add `display` => start typing **di** and select `display`
+3. Add `type` => start typing **ty** and select `type
+4. Add `quick-reply` => start typing **qui** and select `quick-reply`
+
+You should get something like this:
 
 ```json
 "display": {
@@ -24,7 +31,7 @@ In the Cognitive Flow tab, find the **Country** step and add the following piece
 }
 ```
 
-> Note: to save keystrokes, you can use code snippets to generate `"display": { }`, `"type"` and `"quick-reply"`.
+> Note: always use code snippets, they will save you a lot of keystrokes
 >
 > ![](./img/quick-reply-example.gif?raw=true)
 
@@ -64,7 +71,16 @@ Single Select displays a list of available items in a modal window.
 
 ### Add Single Select to the City Step
 
-Find the City step and add the following piece of code:
+Add **Single Select** to the **City** step, like this:
+
+1. Find the **City** step and go to the end of the step
+2. Add `display` => start typing **di** and select `display`
+3. Add `type` => start typing **ty** and select `type
+4. Add `single-select` => start typing **sin** and select `single-select `
+5. Add `title` => start typing **ti** and select `title` then add `Find a city` text
+6. Add `button-text` => start typing **bu** and select `button-text` then add `Select this city` text
+
+You should get something like this:
 
 ```json
 "display": {
