@@ -8,7 +8,7 @@ However, the chatbot could be even more proactive when interacting with the user
 * keep the user well informed on what the bot understands,
 * validate user input,
 * resolve ambiguous input statements,
-* provide suggestions based on history,
+* provide suggestions based on history.
 
 All of these interactions can be achieved with the help of **Reactions**, which allow you to expand the behavior of each question step. Depending on the user's input, the chatbot engine might trigger one of the configured reactions.
 
@@ -487,12 +487,11 @@ Now you should be able to test car validation of the `rent-car` conversation.
 
 ## Ambiguities
 
-The daily language we speak is full of ambiguous statements. Often you will come out from a meeting wondering wether the other person meant one thing or the the opposite.
+The daily language we speak is full of ambiguous statements. Often you will come out from a meeting wondering wether the other person meant one thing or the opposite.
 
 Similarly, chatbots suffer from a level of confusion with ambiguous statements. They can even get confused when multiple domain entities are used in a sentence. For example when a user says:
 
 *"I want to rent a car. I am traveling between France and Germany"*
-
 
 The chatbot will recognise two countries: **France** and **Germany**. It is not immediately obvious which country should be picked.
 
