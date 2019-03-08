@@ -187,6 +187,8 @@ Save and test the `rent-car` conversation.
 
 This time the initial message should show only once.
 
+![](./img/condition-has-not-startDate-demo.gif?raw=true)
+
 #### Skip Parent Question
 
 Another scenario where the `$has` operator comes in handy, is when looking up an entity requires a two (or more) step process. 
@@ -212,6 +214,8 @@ Follow these steps to update the `rent-car` conversation:
   ```json
 "condition": "{{$or ($not ($has country)) ($eq city.country country)}}"
 ```
+
+![](./img/condition-has-not-city-demo.gif?raw=true)
 
   <!--
 ```json
