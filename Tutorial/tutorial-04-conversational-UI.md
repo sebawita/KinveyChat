@@ -1,6 +1,6 @@
 # Conversational UI
 
-In the previous chapter, you've learned how to deal with data and how to allow the user to pass in specific pieces of data. However, this can get quite tricky, when we expect a limited number of answers. For example, if the car rental service only operates in four countries, we shouldn't let the user guess, which countries are available. Instead, we should use conversational UI to guide the user through the process.
+In the previous chapter, you learned how to deal with data and how to allow the user to pass in specific pieces of data. However, this can get quite tricky, when we expect a limited number of answers. For example, if the car rental service only operates in four countries, we shouldn't let the user guess which countries are available. Instead, we should use *conversational UI* to guide the user through the process.
 
 With Conversational UI we not only provide a list of available values, but we can also provide additional information that goes with each item. When listing the available cars, we can also provide the price at the same time.
 
@@ -53,7 +53,7 @@ The whole step should look like this:
 
 The Chatbot will use all the entries allocated to `"entity-type": "Country"`, and display each item as a button.
 
-> Note: **Quick Reply** is great when we are dealing with a small list of items. For anything larger than 10 items it is best to display as a list picker (see **Single Select**).
+> Note: **Quick Reply** is great when we are dealing with a small list of items. For anything larger than 10 items it is best to display as a list picker (see **Single Select** below).
 
 ### Test
 
@@ -129,7 +129,7 @@ The solution to this is quite simple. Instead of getting the data directly from 
  
 To make the Single Select return specific items, you need to add two pieces of configuration to the `"display"` object:
 
-* `data-source` - consist of the REST command to query the data
+* `data-source` - consists of a REST command to query the data
 * `template` - instructs the chatbot on how to display the items
 
 #### Step 1 - add data-source
@@ -145,7 +145,7 @@ To make it more dynamic, you can use the Mustache syntax, and replace `France` w
 Finally, you need to escape the double quotes with a backward slash (`"` => `\"`):
 `"https://baas.kinvey.com/appdata/kid_r1275v_H4/Offices?query={\"country\": \"{{country}}\"}"`
 
-Add the `"data-source"` object to the `"display"` object:
+Add the `"data-source"` object to the `"display"` object, so your final object looks like this:
 
 ```json
 "data-source": {
@@ -177,11 +177,11 @@ A template is made of:
 
 ### Understanding `title` vs `value`.**
 
-It is important to understand that the value returned from the selection, must be matched to the items defined in the Entity (in the training tab). So, if you change the title to be: 
+It is important to understand that the value returned from the selection must be matched to the items defined in the Entity (in the training tab). So, if you change the title to be: 
 
 `"title": "Office in {{city}}"`
 
-Then selecting **Office in Berlin** will fail, as the City Entity, doesn't contain such record.
+Then selecting **Office in Berlin** will fail, as the City Entity doesn't contain such record.
 
 In this case, you need to use the `value`, which should provide the property that the chatbot could match to, like this:
 
@@ -201,7 +201,7 @@ To make the list fancier you can add an image with a flag. Although the records 
 "template": {
   "title": "Office in {{city}}",
   "subtitle": "{{country}}",
-  "value": "{{city}}"
+  "value": "{{city}}",
   "image": "https://www.countries-ofthe-world.com/flags-normal/flag-of-{{country}}.png"
 }
 ```
@@ -230,6 +230,7 @@ The whole **City** step should look like this:
     "template": {
       "title": "{{city}}",
       "subtitle": "{{country}}",
+      "value": "{{city}}",
       "image": "https://www.countries-ofthe-world.com/flags-normal/flag-of-{{country}}.png"
     }
   }
@@ -267,13 +268,15 @@ So, the solution to the above example would be:
 
 Save the cognitive flow, and ask the bot to *"rent a car"* and then select a country.
 
+> Remember you can always type "restart" in your test console to start over with a new chatbot.
+
 Now the conversation should look like this:
 
 ![](./img/single-select-dynamic-demo.gif?raw=true)
 
 ## Carousel
 
-The next the Conversational UI reply templates and perhaps the most elegant one is the **Carousel**. Which allows you to display items in a fancy carousel. This component is best used when you have a few options supported with nice images.
+The next of the Conversational UI reply templates (and perhaps the most elegant one) is the **Carousel**, which allows you to display items in a fancy carousel. This component is best used when you have a few options supported with nice images.
 
 ### Add Carousel to the Car Step
 
@@ -296,7 +299,7 @@ Can you update the step so that it:
 
 * gets the cars from: `"endpoint": "https://baas.kinvey.com/appdata/kid_r1275v_H4/Cars"`
 * displays each item:
-    * `name` as the main item,
+    * `name` as the title,
     * `price` as a subtitle
     * `imageUrl` as an image
 
