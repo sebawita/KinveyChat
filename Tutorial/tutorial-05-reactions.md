@@ -478,16 +478,60 @@ Select **Venice** as the city.
 Then if you select **Kia Sorento** or **Mazda MX-5** you should get an error message.
 
 
-<!--
 ## Ambiguities
+
+The daily language we speak is full of ambiguous statements. Often you will come out from a meeting wondering wether the other person meant one thing or the the opposite.
+
+Similarly, chatbots suffer from a level of confusion with ambiguous statements. They can even get confused when multiple domain entities are used in a sentence. For example when a user says:
+
+*"I want to rent a car. I am traveling between France and Germany"*
+
+
+The chatbot will recognise two countries: **France** and **Germany**. It is not immediately obvious which country should be picked.
+
+Scenarios like this can be resolved with an **Ambiguities Reaction**. This reaction allows the chatbot to ask about the ambiguous entity, and allows the user to select a specific value.
+
+### Add ambiguities resolver to Country
+
+The Car Rental chatbot should be able to handle ambiguity around the selection of a country. Add a **Ambiguities Resolver** to the **Country**, like this:
+
+1. Find the Country step
+2. Add `ambiguities` to the `reactions` => start typing **am** and select `ambiguities`
+3. Add these values:
+  * `"I am not sure, which country do you need a car for. Can you select one of the following?"`
+  * `"You mentioned these countries. Which country do you need a car for?"`
+
+
+#### Solution
+
+The whole reaction should look like this:
+
 ```json
 "reactions": {
+  "acknowledgements": [
+    "Cool, I see you picked {{country}}.",
+    "I understand that you need a car in {{country}}."
+  ],
   "ambiguities": [
-    "I am not sure I understand the doctor you want to meet. Can you select one of the following?"
+    "I am not sure, which country do you need a car for. Can you select one of the following?",
+    "You mentioned these countries. Which country do you need a car for?"
   ]
 }
 ```
+  
+#### Test
 
+Now you should be able to test some statements that mention more than one country.
+
+Try starting the conversation with one of these:
+
+* *I want to rent a car. I am traveling between France and Germany*
+* *I am flying from France to Germany, I want to rent a car*
+
+![](./img/country-validation-demo.gif?raw=true)
+
+
+<!--
 ## Suggestions
 ```json
 "reactions": {
