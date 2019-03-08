@@ -462,6 +462,21 @@ Implementing this validation is quite simple, you need to:
       ]
     }
     ```
+    
+#### Test
+
+Now you should be able to test car validation of the `rent-car` conversation.
+
+##### Berlin
+
+Select **Berlin** as the city.
+Then if you select **BMW 5 Series** or **Ford KA** you should get an error message. Selecting any other car should work fine.
+
+##### Venice
+
+Select **Venice** as the city.
+Then if you select **Kia Sorento** or **Mazda MX-5** you should get an error message.
+
 
 <!--
 ## Ambiguities
