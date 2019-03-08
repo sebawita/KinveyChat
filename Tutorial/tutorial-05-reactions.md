@@ -531,17 +531,75 @@ Try starting the conversation with one of these:
 ![](./img/country-validation-demo.gif?raw=true)
 
 
-<!--
 ## Suggestions
+
+Chatbots are most suitable to automate repetitive business processes for users. The expectation is that a chatbot learns your preferences over time, and gives you an option to just confirm or update the existing info.
+
+This is done with a **Suggestions Reaction**. This reaction allows the chatbot to take note of the most recent values provided by the same user, and provide a suggestion instead of a query. This is especially useful when the answer has to be typed like an address, or a phone number.
+
+It takes for the user to use the same value twice in a row for the value to be used as a valid suggestion.
+Additionally, when suggestions are used together with **Quick Reply** buttons. Then the most recently value will be displayed first. Meaning:
+
+* choose a value once => next time that value will come first
+* choose the same value again => next time that value will be used for a suggestion question
+
+### Add suggestions for country
+
+The Car Rental chatbot should take note of the country each user tends to travel to, and if they keep choosing the same country, then the chatbot should be able to suggest the country instead of asking to choose one.
+
+Add a **Suggestion** to the **Country** **reactions**, like this:
+
+1. Find the Country step
+2. Add `suggestions ` to the `reactions` => start typing **su** and select `suggestions`
+3. Add these values:
+  * `"I see you tend to rent cars in {{country}}. Do you need a car in {{country}}?"`
+  * `"Based on your previous choices. Would you like a car in {{country}}?"`
+
+#### Solution
+
+The whole reaction should look like this:
+
 ```json
 "reactions": {
+  "acknowledgements": [
+    "Cool, I see you picked {{country}}.",
+    "I understand that you need a car in {{country}}."
+  ],
+  "ambiguities": [
+    "I am not sure, which country do you need a car for. Can you select one of the following?",
+    "You mentioned these countries. Which country do you need a car for?"
+  ],
   "suggestions": [
-    "Are you {{contactName}}?",
-    "Is {{contactName}} your name?"
+    "I see you tend to rent cars in {{country}}. Do you need a car in {{country}}?",
+    "Based on your previous choices. Would you like a car in {{country}}?"
   ]
 }
 ```
--->
+
+#### Test
+
+Now you should be able to test country suggestions.
+
+In order to test the suggestions, you need to use the same test window for the whole test. This is because each time you open a new test window, the chatbot will treat it as a new user. This is different for a fully deployed chatbot instance, as there is a mechanism in place to recognise a returning user.
+
+Additionally, you need to complete the conversation twice, in order to test suggestions. Just selecting a value and then calling **restart** will not work.
+
+Try the following steps:
+
+1. Send: *Rent a car from today to tomorrow*
+2. Select **Poland** - note this should appear as the last option in the list
+3. Send: *Warsaw*
+4. Select: **Mercedes**
+5. Send: *Rent a car from today to tomorrow*
+6. Select **Poland** - this time it should appear as the first option
+7. Send: *Warsaw*
+8. Select: **Mercedes**
+9. Send: *Rent a car from today to tomorrow*
+10. You should be presented with a suggestion message plus **Yes** and **No** buttons
+11. Select: **Yes** - this should result in **Poland** as an output
+12. Keep going
+
+![](./img/country-suggestions-demo.gif?raw=true)
 
 ## Homework
 
