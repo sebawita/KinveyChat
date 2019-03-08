@@ -1,7 +1,7 @@
 
 # Reactions
 
-So far you have built a functional chatbot that allows a customer to select the booking dates, country, city and a car, which is supported with a set handy UI widgets. This is great and very powerful stuff.
+So far you have built a functional chatbot that allows a customer to select the booking dates, country, city and a car, which is supported with a set of handy UI widgets. This is great and very powerful stuff.
 
 However, the chatbot could be even more proactive when interacting with the user to:
 
@@ -10,13 +10,13 @@ However, the chatbot could be even more proactive when interacting with the user
 * resolve ambiguous input statements,
 * provide suggestions based on history,
 
-All of these interactions can be achieved with the help of **Reactions**, which allow you to expand the behaviour of each question step. Depending on the user's input, the chatbot engine might trigger one of the configured reactions.
+All of these interactions can be achieved with the help of **Reactions**, which allow you to expand the behavior of each question step. Depending on the user's input, the chatbot engine might trigger one of the configured reactions.
 
-To add a **reaction** to a question step, you just need to add a `reactions` object with the right configuration, which instructs the chatbot on how to react to user's input.
+To add a **reaction** to a question step, you just need to add a `reactions` object with the right configuration, which instructs the chatbot on how to react to the user's input.
 
 ## Acknowledgments
 
-The most commonly used reaction, is an **acknowledgment**, which acknowledges to the user that the chatbot captured an entity value. This is very useful when a user provides data to the chatbot outside of the regular flow. For example:
+The most commonly used reaction is an **acknowledgment**, which acknowledges to the user that the chatbot captured an entity value. This is very useful when a user provides data to the chatbot outside of the regular flow. For example:
 
 ```
 <user>: I want to rent a car in **Spain**
@@ -40,9 +40,9 @@ then, there is no need to acknowledge the City, as that is already expected.
 
 ### Add an acknowledgment for Country and City
 
-In this exercise, you need to update the Country and City steps, to provide acknowledgements of receiving the values.
+In this exercise, you need to update the Country and City steps, to provide acknowledgments of receiving the values.
 
-To do that, you need to add `"reactions"` object with an `"acknowledgements"` property to the Country step, and then provide expressions used for the acknowledgement. Like this:
+To do that, you need to add `"reactions"` object with an `"acknowledgments"` property to the Country step, and then provide expressions used for the acknowledgment. Like this:
 
 ```json
 "reactions": {
@@ -95,7 +95,7 @@ To test it, try this conversation:
 ## Validations
 
 <!--You can also configure your chatbot to validate user input and -->
-Another type of a reaction is **User Input Validation**, which allows the chatbot to validate the input value, and display an error message if required.
+Another type of reaction is **User Input Validation**, which allows the chatbot to validate the input value, and display an error message if required.
 
 The validation can be as simple as a format check of the input, using: **phone**, **email** or **regex** templates.
 These are used to make sure that the user gave us something that at least **looks like** a real **phone** or **email** or other value.
@@ -135,7 +135,7 @@ These can be used to make sure that the values match
 }
 ```
 
-When dealing with pictures, you could use **image** validation, which allows you to specify a list of tags that you expect the picture to **contain**. The chatbot will analyse the picture provided by the user, generate a list of tags. The validation will fail if none of the tags matches those in the **contains list**.
+When dealing with pictures, you could use **image** validation, which allows you to specify a list of tags that you expect the picture to **contain**. The chatbot will analyze the picture provided by the user, generate a list of tags. The validation will fail if none of the tags matches those in the **contains list**.
 
 For example: 
 
@@ -171,7 +171,7 @@ You need to add a validation to ensure that the drop-off date (`endDate`) is gre
 3. Add a `validations` array => using code snippets => start typing **val** and select `validations`,
 4. Add a `custom` validation object => using code-snippets => start typing **vacu** and select `validation-custom`, your code should look like this:
 
-	```json
+  ```json
     "reactions": {
       "validations": [
         {
@@ -185,10 +185,10 @@ You need to add a validation to ensure that the drop-off date (`endDate`) is gre
         }
       ]
     }
-	```
+    ```
 
 5. Set the `condition` to check that the endDate > startDate => using : `"condition": "{{$gt endDate startDate}}"`
-  * we will look dive deeper into conditions in an another chapter
+  * we will dive deeper into conditions in another chapter
 6. Set the error message to say: *"The drop-off date ({{endDate}}) cannot be before the pick-up date ({{startDate}})."*
 
 #### Solution
@@ -231,7 +231,7 @@ Just try to provide different dates pick-up and drop-off dates and see if you ge
 
 ### Validation: with Entity Properties
 
-In the current flow, the user can select a country and then it is provided with a list of cities for that countries. However, the user can still type any city, which might result in a request for **Paris** in **Italy**.
+In the current flow, the user can select a country and then it is provided with a list of cities for those countries. However, the user can still type any city, which might result in a request for **Paris** in **Italy**.
 
 <!--
 If you look at the City Entity, you will notice that each record contains a `country`, `city` and `localName` properties.
@@ -295,7 +295,7 @@ This is also the case for the Car Rental business. Not all cars are always avail
 
 #### Backend - Cloud Function: GetAvailableCars
 
-The backend provides you with a cloud function called `GetAvailableCars`, which expects you to provide a `city` and in response it returns a simplified list of available cars.
+The backend provides you with a cloud function called `GetAvailableCars`, which expects you to provide a `city` and in response, it returns a simplified list of available cars.
 
 > Note, this cloud function is very basic and always returns, the same cars for these cities:
 > 
@@ -303,7 +303,7 @@ The backend provides you with a cloud function called `GetAvailableCars`, which 
 > * Hanover, Gdansk, Lyon, Venice => "BMW 5 Series", "Ford KA", "Mercedes S-Class Cabriolet", "Smart"
 > * Marseille, Cracow, Naples, Munich => "BMW 5 Series", "Ford KA", "Kia Sorento", "Mazda MX-5"
 > 
-> In a real life scenario, this function should take both dates and the location into consideration.
+> In a real-life scenario, this function should take both dates and the location into consideration.
 
 Here is the required configuration to call this cloud function:
 
@@ -330,8 +330,8 @@ Implementing this validation is quite simple, you need to:
 4. Add `Webhook Validation` => start typing **vawe** and select `validation-custom-webhook`
 5. Your code should look like this:
 
-	```json
-	"reactions": {
+  ```json
+  "reactions": {
       "validations": [
         {
           "type": "custom",
@@ -347,7 +347,7 @@ Implementing this validation is quite simple, you need to:
         }
       ]
     }
-	```
+  ```
 6. Update the `data-source` object using the configuration provided above.
 
   > Note, that the `body` should be passed as a `payload` object.
@@ -388,7 +388,7 @@ Implementing this validation is quite simple, you need to:
         }
       ]
     }
-	```
+    ```
   
   You need to extract all `carID` values. This is done with a `selector`, like this:
   
@@ -532,6 +532,6 @@ Like this:
 },
 ```
 
-Now add a picture validation that checks if the picture contain a **car**.
+Now add a picture validation that checks if the picture contains a **car**.
 
 For more info see [the documentation](https://docs.nativechat.com/docs/1.0/cognitive-flow/validation.html#image).
