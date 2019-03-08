@@ -185,7 +185,7 @@ You need to add a validation to ensure that the drop-off date (`endDate`) is gre
         }
       ]
     }
-    ```
+  ```
 
 5. Set the `condition` to check that the endDate > startDate => using : `"condition": "{{$gt endDate startDate}}"`
   * we will dive deeper into conditions in another chapter
