@@ -2,7 +2,7 @@
 
 So far, you've learned how to add a simple conversation that just responds with a message.
 
-However, a well functioning chatbot should be able to understand the key entities that it should be dealing with, like **Country**, **City**, **Car**, **Insurance** etc.
+However, a well functioning chatbot should be able to understand the key entities that it is dealing with, like **Country**, **City**, **Car**, **Insurance** etc.
 
 This is very important when we want the chatbot to understand expressions like:
 
@@ -20,7 +20,7 @@ There are different kinds of Entity Types. One of the simplest ones is `Keyword`
 
 Using a `Keyword Entity` allows you to train your chatbot with a list of values and synonyms. Your chatbot will look for these keywords in the user input. If it finds a match, it will be able to recognise it as the Entity Value.
 
-When you are dealing with a small set of values that doesn't change too often. You can manually provide the values as a `Static` list.
+When you are dealing with a small set of values that doesn't change too often, you can manually provide the values as a `Static` list.
 
 ### Add static data for countries
 
@@ -51,7 +51,7 @@ Here is the list of countries (with their synonyms) you should support:
 
 <!--Add a gif showing how this is done -->
 
-> Note, You need to be careful with short Keywords and short aliases. As sometimes short aliases could match to other words. If you had an alias **FRA** for France, then this could match to Fra in another word. For example:
+> Note, you need to be careful with short Keywords and short aliases, as sometimes short aliases could match other words. If you had an alias **FRA** for France, then this could match to Fra in another word. For example:
 > 
 > <user says> "I need a car in Frankfurt".
 >
@@ -62,7 +62,7 @@ Here is the list of countries (with their synonyms) you should support:
 
 Now you can use the Country entity to allow the user to tell the bot in which country they want the car.
 
-At this point, you should have the `rent-car` conversation ready. See homework from [link to homework #homework thing](./tutorial-02-first-conversation.md).
+At this point, you should have the `rent-car` conversation ready. See homework from [chapter two](./tutorial-02-first-conversation.md).
 
 Now, you are going to add a `question` step to the `rent-car` conversation. Question steps are used to capture specific information from the user. The question will ask the user for a Country and save the response for later.
 
@@ -89,11 +89,11 @@ Now, you are going to add a `question` step to the `rent-car` conversation. Ques
 
  * entity - `"country"`
  * entity-type - `"Country"`
- * messages -  `[ "Which country are you travelling to?" ]`
+ * messages -  `[ "Which country are you traveling to?" ]`
 
 6. Save
 
-The whole conversation, should look like this:
+The whole conversation should look like this:
 
 ```json
 "rent-car": {
@@ -235,6 +235,7 @@ Next, add another question step to the `rent-car` conversation, which should ask
 * Entity Type: `City`,
 * Message: `In which city are you looking for a car?`
 
+Save your changes.
 
 ### Test
 
@@ -309,13 +310,13 @@ Now you will add a third entity type to your chatbot training.
 We don't need a question step to test if an Entity Type works.
 The chatbot engine always makes an attempt to match to any of the available Entity Types.
 
-You can easily test the following expressions:
+You can easily test the following expressions by typing them in the test console:
  
 * *EVA1093FR* => should match: EVA1093FR
 * *My license is MAT1001UK* => should match: MAT1001UK
 * *This license AAA123BB* => shouldn't match anything
 
-And for each, expand the **Understanding**. If a match occurs, you should find an object like:
+Even though the chatbot won't understand you now, expand the **Understanding**. If a match occurs, you should find an object like:
 
 ```json
 "DrivingLicenseNumber": [
@@ -350,9 +351,11 @@ This is so that the chatbot could recognise expressions like: *I want to rent a*
 }
 ```
 
-* The `value` should come from **name**
-* The `synonym` should come from **short-name**
+* The `value` should come from **{{name}}**
+* The `synonym` should come from **{{short-name}}**
+
+Click **test** to try your changes before creating the entity type.
 
 ### Part 2
 
-Add a question step to `rent-car` to ask for a Car.
+Add a question step to `rent-car` in your Cognitive Flow to ask for a Car.
