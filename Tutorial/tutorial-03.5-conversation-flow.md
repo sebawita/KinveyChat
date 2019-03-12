@@ -45,8 +45,3 @@ This time the initial message should show only once.
 <!--TODO: update the gif-->
 ![](./img/flow-has-not-country-demo.gif?raw=true)
 
-
-## Homework
-
-Update the city 
-
