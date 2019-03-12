@@ -78,6 +78,8 @@ Try the following steps:
 5. You should be presented with the confirmation step again, but the email should be changed
 6. Press: **Confirm** 
 
+![Demo](./img/finishing-confirmation-flow-demo.gif?raw=true)
+
 ## Complete with a Webhook
 
 <!--TODO:
