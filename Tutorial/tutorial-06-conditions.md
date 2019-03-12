@@ -1,7 +1,7 @@
 
 # Conditions
 
-Sometimes when you work on a chatbot conversation, you need an extra control over the flow of the conversation. 
+Sometimes when you work on a chatbot conversation, you need extra control over the flow of the conversation. 
 Some steps should be executed only in specific cases (or skipped in specific cases).
 
 For example: the chatbot could ask users if they have a discount-code. If the user says yes, then it should ask for the discount-code. If the user says no, then it should skip the discount-code question.
@@ -10,7 +10,7 @@ For example: the chatbot could ask users if they have a discount-code. If the us
 
 The above scenario can be achieved in two steps:
 
-1. A **confirmation** step - which ask the user a **Yes**/**No** question:
+1. A **confirmation** step - which asks the user a **Yes**/**No** question:
 
   ```json
   {
@@ -98,13 +98,13 @@ You could also use a comparison operator to complete the same scenario, and chec
 
 * `hasCode` **equals** `false`, like this:
 
-  ```json
+```json
 "{{$eq hasCode false}}"
 ```
 
 * `hasCode` **not equals** `true`, like this:
 
-  ```json
+```json
 "{{$ne hasCode true}}"
 ```
 
@@ -119,7 +119,7 @@ Here is a list of available comparison operators.
 
 ### Operator `$in`
 
-The`$in` operator allows you to check if a value is present in an array.
+The `$in` operator allows you to check if a value is present in an array.
 
 ```json
 "{{$in myValue myArray}}"
@@ -145,11 +145,11 @@ The `$has` operator allows you to check if a specific entity has been provided b
 
 #### Skip Parent Question
 
-The `$has` operator comes in handy, when looking up an entity requires a two (or more) step process. 
+The `$has` operator comes in handy when looking up an entity requires a two (or more) step process. 
 
 For example, in order to find a city, the chatbot asks for a country first, and then based on the country it provides a list of cities. However, if the user already provided the city, then it would be good to skip the country step.
 
-Please, note that the **value of the country** is used in the validation of the city. So, the city validation should also be updated, so that it only check the city.country when country has been provided.
+Please, note that the **value of the country** is used in the validation of the city. So, the city validation should also be updated, so that it only check the `city.country` when country has been provided.
 
 Follow these steps to update the `rent-car` conversation:
 
