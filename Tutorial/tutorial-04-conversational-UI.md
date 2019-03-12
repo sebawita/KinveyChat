@@ -432,6 +432,25 @@ The two steps should look like this:
 },
 ```
 
+### Update the condition for the message
+
+Whenever, you change the order of conversation, it is worth making sure that you don't break the expected flow.
+Since, the country is not the first entity that the chatbot should ask about, you should update the condition for the initial message, so that it doesn't show when the `startDate` is provided. 
+
+The first message step should look like this now:
+
+```json
+{
+  "type": "message",
+  "messages": [
+    "Great, let me help you find a car for you."
+  ],
+  "conditions": [
+    "{{$not ($has startDate)}}"
+  ]
+},
+```
+
 ### Test
 
 Now you should be able to test the new flow of the `rent-car` conversation.

@@ -108,7 +108,6 @@ You could also use a comparison operator to complete the same scenario, and chec
 "{{$ne hasCode true}}"
 ```
 
-
 Here is a list of available comparison operators.
 
 * `$eq` - equals
@@ -144,54 +143,9 @@ For example when a price should be **less than 20**, but also it should be a **p
 
 The `$has` operator allows you to check if a specific entity has been provided by a user. This operator comes in handy in many scenarios.
 
-#### Don't repeat messages
-
-> This might be a good moment to explain the algorithm that controls the cognitive flow:
-> 
-> Each time user provides an input, the flow algorithm evaluates each step from the beginning, until gets to a step that requires an input for the user.
-> 
-> This means, that if it gets a questions step, it checks if the entity is already provided: 
-> 
-> * if true => move to the next step
-> * if false => ask user and stop
-> 
-> However, if the flow algorithm gets to a message step, it automatically prints out the message.
-
-Most of the time you only want to print out a message in a specific scenario. For example: the initial message *Great, let me help you find a car for you.*, should only be displayed when the user starts the conversation.
-
-This can be done simply by checking if the user **has not** provided the **startDate**.
-
-Update the first message step in the `rent-car` conversation, to add a condition that handles that:
-
-1. Find the first message step in the `rent-car` conversation
-2. Add a `conditions` array => start typing **co** and select `conditions`
-3. Add the following condition: `"{{$not ($has startDate)}}"`
-
-  The step should look like this:
-
-  ```json
-{
-      "type": "message",
-      "messages": [
-        "Great, let me help you find a car for you."
-      ],
-      "conditions": [
-        "{{$not ($has startDate)}}"
-      ]
-},
-```
-
-##### Test
-
-Save and test the `rent-car` conversation.
-
-This time the initial message should show only once.
-
-![](./img/condition-has-not-startDate-demo.gif?raw=true)
-
 #### Skip Parent Question
 
-Another scenario where the `$has` operator comes in handy, is when looking up an entity requires a two (or more) step process. 
+The `$has` operator comes in handy, when looking up an entity requires a two (or more) step process. 
 
 For example, in order to find a city, the chatbot asks for a country first, and then based on the country it provides a list of cities. However, if the user already provided the city, then it would be good to skip the country step.
 
