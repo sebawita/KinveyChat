@@ -82,7 +82,7 @@ Try the following steps:
 
 ## Complete the conversation with a Webhook
 
-Once the user completes the conversation and confirms their choice, all you are left with is to take the date collected in the conversation and send it to your backend.
+Once the user completes the conversation and confirms their choice, all you are left with is to take the data collected in the conversation and send it to your backend.
 This would usually mean triggering a process to execute on the agreed transaction. For example:
 
 1. user: orders a pizza via your chatbot
@@ -91,7 +91,7 @@ This would usually mean triggering a process to execute on the agreed transactio
 4. kitchen: cooks a pizza
 5. delivery: delivers the pizza
 
-In order to send the data to your backend you can use a `webhook` step. Its purpose is simple, execute an HTTP command described in the `data-source` property and display the provided **message** once that is complete.
+In order to send the data to your backend, you can use a `webhook` step. Its purpose is simple, execute an HTTP command described in the `data-source` property and display the provided **message** once that is complete.
 
 Here is what the `step-webhook` code snippet generates:
 
@@ -115,11 +115,11 @@ Here is what the `step-webhook` code snippet generates:
 
 A **Webhook Step** behaves just like a **Message Step** in the sense that the **Conversation Flow Algorithm** will execute it every time it steps over it. So, if you follow the pizza order webhook step with a satisfaction question, your customer might get charge twice and will receive two pizza orders.
 
-This can be easily avoided. You can add an `entity` property, which is used to store the result returned from executing the webhook. You can use the entity content to display it to the user (more on that in the bonus section). But more importantly in this case, the **Conversation Flow Algorithm** will see that the webhook already contains a result, and therefore, it will not execute it again.
+This can be easily avoided. You can add an `entity` property, which is used to store the result returned from executing the webhook. You can use the entity content to display it to the user (more on that in the bonus section). But more importantly, in this case, the **Conversation Flow Algorithm** will see that the webhook already contains a result, and therefore, it will not execute it again.
 
 ## Send the Order to the backend
 
-To finalise the car renting conversation, you need to send the Order to the backend, and then provide the user with a confirmation message.
+To finalize the car renting conversation, you need to send the Order to the backend, and then provide the user with a confirmation message.
 
 ### Backend
 
@@ -135,7 +135,7 @@ For the purposes of the Car Rental service, there is a Cloud Function called **B
 },
 ```
 
-The booking details should provided as the request body (`payload` in the chatbot configuration). For example:
+The booking details should be provided as the request body (`payload` in the chatbot configuration). For example:
 
 ```json
 {
@@ -148,7 +148,7 @@ The booking details should provided as the request body (`payload` in the chatbo
 }
 ```
 
-In the real world application the **BookCar** function should perform some extra validations, save the new order and trigger additional processes (like an email confirmation etc.).
+In the real world application, the **BookCar** function should perform some extra validations, save the new order and trigger additional processes (like an email confirmation etc.).
 
 In the context of this tutorial, **BookCar** only saves the provided data in a collection and returns a unique booking reference, i.e. `{ bookingRef: BER01234 }`
 Additionally, in order to avoid storing sensitive data, the provided email always gets replaced with `sample@email.com`.
@@ -243,13 +243,13 @@ git
 
 ## Congratulations
 
-And just like that you have created a fully functioning chatbot. That can communicate using Natural Language Processing, communicate with the backend to display data, validate user input and save the transaction to the backend.
+And just like that, you have created a fully functioning chatbot. That can communicate using Natural Language Processing, communicate with the backend to display data, validate user input and save the transaction to the backend.
 
-There is still more to learn. You can find a lot more info the [documentation](https://docs.nativechat.com/).
+There is still more to learn. You can learn more from the [documentation](https://docs.nativechat.com/).
 
 ## Homework
 
-As a bonus, here is the final homework for you.
+As a bonus, here is the final homework for you, which should use a lot of the knowledge that you've learned in this tutorial.
 
 Before booking the car, you should:
 
@@ -283,7 +283,7 @@ It expects the body to be like:
 }
 ```
 
-As a result it returns something like this:
+As a result, it returns something like this:
 
 ```json
 {
@@ -292,15 +292,15 @@ As a result it returns something like this:
 }
 ```
 
-### High level guide
+### High-level guide
 
-Here is a high level guide on how to complete this challenge.
+Here is a high-level guide on how to complete this challenge.
 
 > Note, that you should be adding the solution, just after the **entity-confirmation** step, and before the **BookCar webhook** step.
 
 ### Step 0
 
-Before you display the quote. You need add a **webhook** step, that will call **GetQuote**.
+Before you display the quote. You need to add a **webhook** step, that will call **GetQuote**.
 
 Make sure to add the `entity` property (you can call it `quote`), which you will use to display the result later. Like: `{{quote.days}}`.
 
@@ -329,7 +329,7 @@ Also, note that you should use [$currency](https://docs.nativechat.com/docs/1.0/
 
 ### Step 2
 
-Add a **message** step with a condition checking the entity form the confirmation step is false. (i.e. check if `wantsToBook` equals false, or is not true).
+Add a **message** step with a condition checking the entity form the confirmation step is false. (i.e. check if `wantsToBook` equals false or is not true).
 
 If you don't remember how, you can go back to the comparison chapter, or check the [docs](https://docs.nativechat.com/docs/1.0/cognitive-flow/conditions.html#comparisons).
 
