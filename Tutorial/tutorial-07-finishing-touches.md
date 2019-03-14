@@ -246,3 +246,187 @@ git
 And just like that you have created a fully functioning chatbot. That can communicate using Natural Language Processing, communicate with the backend to display data, validate user input and save the transaction to the backend.
 
 There is still more to learn. You can find a lot more info the [documentation](https://docs.nativechat.com/).
+
+## Homework
+
+As a bonus, here is the final homework for you.
+
+Before booking the car, you should:
+
+1. Provide the user with a quote and ask if they would like to go ahead with the booking.
+2. If the user confirms, then execute the **BookCar** webhook.
+3. If not, then just print a message: *I understand. I will cancel the quote now.*
+
+![Homework Demo](./img/finishing-homework-demo.gif?raw=true)
+
+### GetQuote
+
+To get a quote you should call the **GetQuote** cloud function.
+
+**GetQuote** can be reached with the following parameters:
+
+```json
+"endpoint": "https://baas.kinvey.com/rpc/kid_r1275v_H4/custom/GetQuote",
+"method": "POST",
+"headers": {
+  "Authorization": "Basic a2lkX3IxMjc1dl9INDo5YWYxOTcxZTFlY2U0NTNhYWUwOTQ2MzZlYmM5MGJlNw=="
+},
+```
+
+It expects the body to be like:
+
+```json
+{
+  "car": "Smart"
+  "pickUpDate": "10 Mar 2019",
+  "dropOffDate": "15 Mar 2019"
+}
+```
+
+As a result it returns something like this:
+
+```json
+{
+  "days": 5
+  "price": 200
+}
+```
+
+### High level guide
+
+Here is a high level guide on how to complete this challenge.
+
+> Note, that you should be adding the solution, just after the **entity-confirmation** step, and before the **BookCar webhook** step.
+
+### Step 0
+
+Before you display the quote. You need add a **webhook** step, that will call **GetQuote**.
+
+Make sure to add the `entity` property (you can call it `quote`), which you will use to display the result later. Like: `{{quote.days}}`.
+
+As a message, you could add something like: *Preparing a quote*, but that is not necessary.
+
+### Step 1
+
+After that, add a **confirmation** type step.
+
+Make sure to call the `entity` property something meaningful like `wantsToBook`.
+
+It should display a message like:
+
+```
+Here is the summary of your order:
+Car: Smart
+Price per day: $50
+5 day(s): from  10-Mar-2019 to 15-Mar-2019
+Total price $250
+Would you like to go ahead and book it?
+```
+
+The number of days you can get from `quote.days` (or whatever you called the webhook entity), and the total price from `quote.price`.
+
+Also, note that you should use [$currency](https://docs.nativechat.com/docs/1.0/cognitive-flow/formatting.html#currency) and [$date](https://docs.nativechat.com/docs/1.0/cognitive-flow/formatting.html#date) formatters to display the data in the desired format.
+
+### Step 2
+
+Add a **message** step with a condition checking the entity form the confirmation step is false. (i.e. check if `wantsToBook` equals false, or is not true).
+
+If you don't remember how, you can go back to the comparison chapter, or check the [docs](https://docs.nativechat.com/docs/1.0/cognitive-flow/conditions.html#comparisons).
+
+The message should be something like: *I understand. I will cancel the quote now.*
+
+### Step 3
+
+Update the **BookCar Webhook** step. Add a condition, so that it executes when the confirmation entity is true (i.e. check `wantsToBook` is true)
+
+### Step 4
+
+Test it, you know the drill.
+
+#### Solution
+
+I hope that you completed the solution all by yourself, and you are here just to compare the results. Either way, here are the three new steps, and the updated **BookCar** step.
+
+**GetQuote Step**
+
+```json
+{
+  "type": "webhook",
+  "entity": "quote",
+  "data-source": {
+    "endpoint": "https://baas.kinvey.com/rpc/kid_r1275v_H4/custom/GetQuote",
+    "method": "POST",
+    "headers": {
+      "Authorization": "Basic a2lkX3IxMjc1dl9INDo5YWYxOTcxZTFlY2U0NTNhYWUwOTQ2MzZlYmM5MGJlNw=="
+    },
+    "payload": {
+      "car": "{{car}}",
+      "pickUpDate": "{{$date startDate 'D MMM YYYY'}}",
+      "dropOffDate": "{{$date endDate 'D MMM YYYY'}}"
+    }
+  }
+},
+```
+
+**Confirmation Step**
+
+```json
+{
+  "type": "confirmation",
+  "entity": "wantsToBook",
+  "messages": [
+    [
+      "Here is the summary of your order:",
+      "Car: {{car}}",
+      "Price per day: {{$currency car.price 'USD'}}",
+      "{{ quote.days }} day(s): from  {{$date startDate 'D MMM YYYY'}} to {{$date endDate 'D MMM YYYY'}}",
+      "Total price {{$currency quote.price 'USD'}}.",
+      "Would you like to go ahead and book it?"
+    ]
+  ]
+},
+```
+
+**Message Step**
+
+```json
+{
+  "type": "message",
+  "messages": [
+    "I understand. I will cancel the quote now."
+  ],
+  "conditions": [
+    "{{$not wantsToBook}}"
+  ]
+},
+```
+
+**Webhook BookCar step**
+
+```json
+{
+  "type": "webhook",
+  "entity": "order-response",
+  "data-source": {
+    "endpoint": "https://baas.kinvey.com/rpc/kid_r1275v_H4/custom/BookCar",
+    "method": "POST",
+    "headers": {
+      "Authorization": "Basic a2lkX3IxMjc1dl9INDo5YWYxOTcxZTFlY2U0NTNhYWUwOTQ2MzZlYmM5MGJlNw=="
+    },
+    "payload": {
+      "pickUpDate": "{{$date startDate 'D MMM YYYY'}}",
+      "dropOffDate": "{{$date endDate 'D MMM YYYY'}}",
+      "car": "{{car}}",
+      "price": "{{car.price}}",
+      "city": "{{city}}",
+      "email": "{{email}}"
+    }
+  },
+  "messages": [
+    "Your car is booked. Your booking reference is {{order-response.bookingRef}}"
+  ],
+  "conditions": [
+    "{{wantsToBook}}"
+  ]
+}
+```
