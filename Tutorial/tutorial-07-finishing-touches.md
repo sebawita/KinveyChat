@@ -11,7 +11,7 @@ Entities confirmation is a crucial step that brings in a lot of value to the con
 * it allows the user to change any of the values - that is without the need to redo the whole conversation
 * it provides a mechanism to confirm the conversation, which allows the chatbot to complete the transaction
 
-There is a special type of a step `entities-confirmation`, which handles all of the above functionality in a simple, but elegant fashion.
+There is a special type of a step, `entities-confirmation`, which handles all of the above functionality in a simple, but elegant fashion.
 
 ### Add confirmation step
 
