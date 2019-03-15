@@ -113,9 +113,9 @@ Here is what the `step-webhook` code snippet generates:
 
 ## Conversation Flow for Webhook Steps
 
-A **Webhook Step** behaves just like a **Message Step** in the sense that the **Conversation Flow Algorithm** will execute it every time it steps over it. So, if you follow the pizza order webhook step with a satisfaction question, your customer might get charge twice and will receive two pizza orders.
+A **Webhook Step** behaves just like a **Message Step** in the sense that the **Conversation Flow Algorithm** will execute it every time it steps over it. So, if you follow the pizza order webhook step with a satisfaction question, your customer might get charged twice and will receive two pizza orders.
 
-This can be easily avoided. You can add an `entity` property, which is used to store the result returned from executing the webhook. You can use the entity content to display it to the user (more on that in the bonus section). But more importantly, in this case, the **Conversation Flow Algorithm** will see that the webhook already contains a result, and therefore, it will not execute it again.
+This can be easily avoided. You can add an `entity` property, which is used to store the result returned from executing the webhook. You can use the entity content to display it to the user (more on that in the bonus section below). But in this case, the **Conversation Flow Algorithm** will see that the webhook already contains a result, and therefore it will not execute it again.
 
 ## Send the Order to the backend
 
@@ -191,7 +191,7 @@ In order to complete the transaction with a call to the **BookCar** cloud functi
   ```
 
 6. Add an `entity` property (preferably, just before the `data-source` configuration) => start typing **en** and select `entity` and call it `order-response`. This will allow you to capture the response returned by **BookCar**.
-7. Add a `massages` array (preferably, at the end of the step configuration)  => start typing **me** and select `messages`. 
+7. Add a `messages` array (preferably, at the end of the step configuration)  => start typing **me** and select `messages`. 
 
   Then add this message: *Your car is booked. Your booking reference is {{order-response.bookingRef}}.*
 
@@ -243,9 +243,9 @@ git
 
 ## Congratulations
 
-And just like that, you have created a fully functioning chatbot. That can communicate using Natural Language Processing, communicate with the backend to display data, validate user input and save the transaction to the backend.
+And just like that, you have created a fully functioning chatbot. It can communicate using Natural Language Processing, communicate with the backend to display data, validate user input and save the transaction to the backend.
 
-There is still more to learn. You can learn more from the [documentation](https://docs.nativechat.com/).
+There is still more to learn. You can learn more from the [Kinvey Chat documentation](https://docs.nativechat.com/).
 
 ## Homework
 
