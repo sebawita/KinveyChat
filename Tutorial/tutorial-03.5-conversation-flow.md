@@ -16,7 +16,7 @@ Most of the time you only want to print out a message in a specific scenario. Fo
 
 This can be done simply adding a `conditions` array, which could check if the user **has not** provided the **country**.
 
-Update the first message step in the `rent-car` conversation, to add a condition that handles that:
+Update the first message step in the `rent-car` conversation to add a condition:
 
 1. Find the first message step in the `rent-car` conversation
 2. Add a `conditions` array => start typing **co** and select `conditions`
