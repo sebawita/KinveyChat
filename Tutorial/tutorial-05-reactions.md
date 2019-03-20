@@ -387,8 +387,8 @@ Implementing this validation is quite simple, you need to:
           "class": "Luxury"
         }
       ]
-    }
-    ```
+  }
+  ```
   
   You need to extract all `carID` values. This is done with a `selector`, like this:
   

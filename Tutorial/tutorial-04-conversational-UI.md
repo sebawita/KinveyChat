@@ -163,7 +163,7 @@ Next, in order for the chatbot to understand how to display the results of the q
 
 ```json
 "template": {
-  "title": "{{city}}",
+  "title": "{{name}}",
   "subtitle": "{{country}}",
 }
 ```
@@ -179,7 +179,7 @@ A template is made of:
 
 It is important to understand that the value returned from the selection must be matched to the items defined in the Entity (in the training tab). So, if you change the title to be: 
 
-`"title": "Office in {{city}}"`
+`"title": "Office in {{name}}"`
 
 Then selecting **Office in Berlin** will fail, as the City Entity doesn't contain such record.
 
@@ -187,9 +187,9 @@ In this case, you need to use the `value`, which should provide the property tha
 
 ```json
 "template": {
-  "title": "Office in {{city}}",
+  "title": "Office in {{name}}",
   "subtitle": "{{country}}",
-  "value": "{{city}}"
+  "value": "{{name}}"
 }
 ```
 
@@ -199,9 +199,9 @@ To make the list fancier you can add an image with a flag. Although the records 
 
 ```json
 "template": {
-  "title": "Office in {{city}}",
+  "title": "Office in {{name}}",
   "subtitle": "{{country}}",
-  "value": "{{city}}",
+  "value": "{{name}}",
   "image": "https://www.countries-ofthe-world.com/flags-normal/flag-of-{{country}}.png"
 }
 ```
@@ -228,9 +228,9 @@ The whole **City** step should look like this:
       }
     },
     "template": {
-      "title": "{{city}}",
+      "title": "{{name}}",
       "subtitle": "{{country}}",
-      "value": "{{city}}",
+      "value": "{{name}}",
       "image": "https://www.countries-ofthe-world.com/flags-normal/flag-of-{{country}}.png"
     }
   }

@@ -235,8 +235,7 @@ Try the following steps:
 1. Send: *I want to rent a car*
 2. Select: **StartDate**, **EndDate**, **Country**, **City**, **Car**, **Email**
 3. Press: **Confirm**
-4. You should receive a message with a unique **bookingRef**.
-git
+4. You should receive a message with a unique **bookingRef**
 
 ![Full Demo](./img/finishing-full-flow-demo.gif?raw=true)
 

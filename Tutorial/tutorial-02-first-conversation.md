@@ -2,7 +2,7 @@
 
 ## Setting up the first conversation
 
-There is also the missing piece of: how did the chatbot know to respond with: *"This is conversation 1"* to *"Conversation 1"*?
+In the previous chapter you've used one of the generated conversations, but you might be wondering: how did the chatbot know to respond with: *"This is conversation 1"* to *"Conversation 1"*?
 
 You will solve this puzzle by creating your first conversation.
 

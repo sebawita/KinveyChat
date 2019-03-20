@@ -183,7 +183,7 @@ You can access the data by making a REST call with the following details:
 
 ![](./img/kinvey-offices.png?raw=true)
 
-Each record contains **country**, **city**, and **localName** (how the city is called in the local language, which can be used as an alias).
+Each record contains **country**, **name**, and **localName** (how the city is called in the local language, which can be used as an alias).
 
 ### Add Dynamic Data for Cities
 
@@ -207,7 +207,7 @@ It is time for you to create your second entity for **City**:
 
 #### Mustache template
 
-You might be wondering about the syntax used for the Value template: `{{city}}`.
+You might be wondering about the syntax used for the Value template: `{{name}}`.
 Kinvey Chat uses Mustache template system, which allows mixing text with values returned from an object.
 
 For example, a template `City: {{name}}`, would return an array of items like:
@@ -342,14 +342,14 @@ This is so that the chatbot could recognise expressions like: *I want to rent a*
 * The data should be loaded from:
 
   ```json
-{
+  {
       "endpoint": "https://baas.kinvey.com/appdata/kid_r1275v_H4/Cars",
       "method": "GET",
       "headers": {
         "Authorization": "Basic a2lkX3IxMjc1dl9INDo5YWYxOTcxZTFlY2U0NTNhYWUwOTQ2MzZlYmM5MGJlNw=="
       }
-}
-```
+  }
+  ```
 
 * The `value` should come from **{{name}}**
 * The `synonym` should come from **{{short-name}}**
