@@ -1,4 +1,4 @@
-## Intro
+#### Intro
 
 In the last few years, voice assistants changed the way we interact with our devices. To some, this was a somewhat strange experience, but many more felt that this was a more natural way of interacting with most services provided by our phones and computers.
 
@@ -60,7 +60,7 @@ Also, if you happen to use a number that someone else is also using (this is not
 
 Here is the list of available functions:
 
-### getAccountStatus
+#### getAccountStatus
 
 `getAccountStatus` allows you to ask for the Account balance, minutes, SMS, and data.
 
@@ -85,13 +85,14 @@ Here is an example of how to get the account balance for id **012345678**
   "balance": 12,
   "minutes": 100,
   "SMS": 200,
-  "data": 29
+  "megabytes": 29,
+  "data": "29 MB"
 }
 ```
 
 
 
-### topUp
+#### topUp
 
 `topUp` allows you to top up your account balance, as a result, the balance will increase and you will receive an updated account status.
 
@@ -118,16 +119,17 @@ Here is an example of how to top the account id **012345678** with **10** credit
 
 ```json
 {
+  "SMS": 200,
   "balance": 22,
   "minutes": 100,
-  "SMS": 200,
-  "data": 29
+  "data": "29 MB",
+  "megabytes": 29
 }
 ```
 
 
 
-### availableCards/:id
+#### availableCards/:id
 
 `availableCads` allows you to look up all associated payment cards with the account.
 
@@ -148,17 +150,19 @@ Here is an example of how to check what payment cards are associated with the ac
 **Result:**
 
 ```json
-{
-  "balance": 22,
-  "minutes": 100,
-  "SMS": 200,
-  "data": 29
-}
+[
+  {
+    "card": "6575"
+  },
+  {
+    "card": "3688"
+  }
+]
 ```
 
 
 
-### resetAccount
+#### resetAccount
 
 `resetAccount` allows you to reset your account. This can come useful when you want to start from scratch.
 
@@ -183,22 +187,23 @@ Here is an example of how to reset the account id **012345678**.
   "balance": 12,
   "minutes": 100,
   "SMS": 200,
-  "data": 29
+  "megabytes": 29,
+  "data": "29 MB"
 }
 ```
 
 
 
-### showDataPackages
+#### dataPackages
 
-`showDataPackages` allows you to view available data packages for you to purchase.
+`dataPackages` allows you to view available data packages for you to purchase.
 
-For each package you will receive a name, amount of data in GB and MB, and a price.
+For each package you will receive a name, formatted data size, megabytes, and a price.
 
 **Signature:**
 
 ```
-/showDataPackages
+/dataPackages
 ```
 
 No parameters are required.
@@ -207,7 +212,7 @@ No parameters are required.
 
 Here is an example of how to view available data packages.
 
-[https://demoapis.com/cmobile/showDataPackages](https://demoapis.com/cmobile/showDataPackages)
+[https://demoapis.com/cmobile/dataPackages](https://demoapis.com/cmobile/dataPackages)
 
 **Result:**
 
@@ -215,26 +220,26 @@ Here is an example of how to view available data packages.
 [
   {
     "name": "lite",
-    "dataGB": 0.5,
-    "dataMB": 512,
+    "data": "512 MB",
+    "megabytes": 512,
     "price": 7
   },
   {
     "name": "small",
-    "dataGB": 1,
-    "dataMB": 1024,
+    "data": "1 GB",
+    "megabytes": 1024,
     "price": 10
   },
   {
     "name": "medium",
-    "dataGB": 3,
-    "dataMB": 3072,
+    "data": "3 GB",
+    "megabytes": 3072,
     "price": 20
   },
   {
     "name": "big",
-    "dataGB": 5,
-    "dataMB": 5120,
+    "data": "5 GB",
+    "megabytes": 5120,
     "price": 25
   }
 ]
@@ -242,7 +247,7 @@ Here is an example of how to view available data packages.
 
 
 
-### buyData
+#### buyData
 
 `buyData` allows you to purchase more data for your account. As a result, more data will be added to the account, and the price of the package will be deducted from the balance.
 
@@ -260,37 +265,18 @@ Additionally, you need to provide a query param `dataPack` with the name of the 
 
 Here is an example of how to buy a **medium** data pack for the account id **012345678**.
 
-[https://demoapis.com/cmobile/buyData/012345678?dataPack=medium](https://demoapis.com/cmobile/buyData/012345678?dataPack=medium)
+[https://demoapis.com/cmobile/buyData/012345678?dataPack=tiny](https://demoapis.com/cmobile/buyData/012345678?dataPack=tiny)
 
 **Result:**
 
 ```json
-[
-  {
-    "name": "lite",
-    "dataGB": 0.5,
-    "dataMB": 512,
-    "price": 7
-  },
-  {
-    "name": "small",
-    "dataGB": 1,
-    "dataMB": 1024,
-    "price": 10
-  },
-  {
-    "name": "medium",
-    "dataGB": 3,
-    "dataMB": 3072,
-    "price": 20
-  },
-  {
-    "name": "big",
-    "dataGB": 5,
-    "dataMB": 5120,
-    "price": 25
-  }
-]
+{
+  "SMS": 200,
+  "balance": 5,
+  "minutes": 100,
+  "data": "0.5 GB",
+  "megabytes": 541
+}
 ```
 
 
@@ -308,7 +294,7 @@ We will tackle this project in two rounds.
 
 The getting started is as simple as 1,2,3, which can be done in these really easy steps.
 
-#### Step 1 — Create a Kinvey Chat project
+### Step 1 — Create a new Kinvey Chat project
 
 First, you need to sign in to [Kinvey Chat Console](https://bots.kinvey.com/). 
 
@@ -332,7 +318,7 @@ This will create a simple chatbot, with a couple of super basic conversations.
 
 
 
-#### Testing
+**Testing**
 
 To test it, press the **[Test]** button. Then when the chatbot loads:
 
@@ -343,7 +329,7 @@ To test it, press the **[Test]** button. Then when the chatbot loads:
 
 
 
-#### Step 2 — Create your first conversation — check my balance
+### Step 2 — Create your first conversation — check my balance
 
 Now that you have a working chatbot, it is time for you to implement the first conversation, which is for the **check my balance** scenario.
 
@@ -526,7 +512,7 @@ Here are `messages` containing all of the data returned from the `getAccountStat
     "Let's have a look at your account. You have:",
     "{{$currency status.balance 'USD'}}",
     "{{status.minutes}} minutes, {{status.SMS}} text messages",
-    "and {{status.data}} megabytes left"
+    "and {{status.data}} left"
   ]
 ]
 ```
@@ -550,7 +536,7 @@ The whole `check-my-balance` conversation should look like this:
           "Let's have a look at your account. You have:",
           "{{$currency status.balance 'USD'}}",
           "{{status.minutes}} minutes, {{status.SMS}} text messages",
-          "and {{status.data}} megabytes left"
+          "and {{status.data}} left"
         ]
       ]
     }
@@ -642,23 +628,169 @@ Your `welcome` and `help` conversations should look like this:
 
 **Test**
 
-To test this new configuration, press the **[Test]** button, and type: *"Hi"*
+To test this new configuration, press the **[Test]** button, and type: *"Hi"*.
+
+The welcome message should be different 
 
 
 
-#### Step 3 — Deploy to Alexa
+### Step 3 — Connect with the Alexa Console
 
-- Configure Amazon Alexa account and create a new chatbot
-  - Use proxy to test your chatbot
-- Use Alexa dev console
+Now that you have a working chatbot, it is time to start talking to it with actual voice commands. The best thing is that you don't even need an Alexa device to do that.
+
+All you need is a configured [Alexa Developer Console](https://developer.amazon.com/alexa/console/ask) and the [Kinvey Chat Proxy skill](https://alexa.amazon.co.uk/spa/index.html?#skills/dp/B07W4QRF28).
 
 
 
-### Challenges
+**Kinvey Chat Proxy skill**
 
-Challenges:
+**Kinvey Chat Proxy** is a skill, which is designed to easily connect with your Kinvey Chat chatbots without having to publish a new skill. It works like a sandbox skill, which relays all messages from the user to the connected Kinvey Chat chatbot.
 
-- trouble shoot pronunciation: pay => play :s
+Go to your Alexa app, find and install the **Kinvey Chat Proxy** skill.
+
+Alternatively, you can install it using the Alexa web interface. Log in to your Amazon account from the [US Portal](https://alexa.amazon.com/), [UK Portal]( https://alexa.amazon.co.uk/) (or your country specific portal). Then go to **Skills**, find and install the **Kinvey Chat Proxy** skill.
+
+
+
+**Amazon Alexa Console**
+
+Next, you need to go to the [Alexa Developer Console](https://developer.amazon.com/alexa/console/ask) and open the Alexa Test simulator.
+
+To open the simulator you need to use an Alexa skill. If you already have one, you can just go to the **Test** tab and you are good to go.
+
+If you don't have an Alexa skill yet, here is what you need to do:
+
+
+
+In the [Alexa Developer Console](https://developer.amazon.com/alexa/console/ask), press the **Create Skill** button.
+
+> Note, you could use this skill later, when you are ready to publish your chatbot as an Alexa skill.
+
+Call the skill **C Mobile**, and select **Custom** model and **Provision your own** hosting method, and press the **Create skill** button.
+
+Then, select the **Start from scratch** template, and press the **Choose** button.
+
+Open the **JSON Editor**, and find **"Amazon.FallbackIntent"** and set the **samples** to *"Sample"* (at this stage it could be any word, we just need something in there), it should look like this:
+
+```
+{
+    "name": "AMAZON.FallbackIntent",
+    "samples": [
+        "Sample"
+    ]
+},
+```
+
+Then, press the **Build Model** button and wait for a little bit.
+
+Finally, open the **Test** tab, and switch the skill testing from **Off** to **Development**.
+
+
+
+Here, is a recording of how to do it:
+
+<video>
+  <source src="./video/Alexa-new-skill.mp4?raw=true">
+</video>
+
+
+
+**Use proxy**
+
+Now, to complete the loop, you just need to get the **proxy id** and pass it to the **Kinvey Chat Proxy** skill.
+
+In **Kinvey Chat**, expand the **Test** options, and choose **Test in Alexa Developer Console**. This will provide you with the instructions on how to make it work.
+
+You should something like this:
+
+<img src="./img/Kinvey-Chat-Proxy-Screen.png?raw=true" width="400">
+
+Copy the last message that contains the **proxy id**. (hint. you can click on the little icon next to it).
+
+Go back to the **Alexa Developer Console**:
+
+Type **"kinvey chat proxy"** and press Enter.
+
+Then, paste the **proxy command** and press enter.
+
+And voila, your chatbot is ready to listen and to speak back to you.
+
+
+
+Here, is a recording of how to do it:
+
+<video>
+  <source src="./video/Connecting-Proxy-to-Alexa.mp4?raw=true">
+</video>
+
+**Talk to me**
+
+There are two ways that you can interact your chatbots in **Alexa Developer Console**.
+
+- You can type everything, just like you would in a text based interface.
+- You can talk to it, just like you would expect to use the real device, except you don't have to say the **"Alexa"** keyword. To do that click and hold on the microphone icon, and release when you finish the command.
+
+> Note, if you reload the Alexa Developer Console page, or close it and open it again, then the console will disconnect from the Kinvey Chat Proxy skill. All you need to do is say: *"Kinvey Chat Proxy"*, and you will be back where you left it (no need to provide the Proxy ID again).
+
+
+
+**Test**
+
+To hear the welcome message, say: **"hi"**
+
+Then say: **"Check my balance"**
+
+
+
+And just like that, you have just talked to your first Kinvey Chat chatbot through an Alexa skill.
+
+Well done, you deserve a pat on the back:
+
+<img src="https://media.giphy.com/media/cLYubXxF0P55MO1IUY/giphy.gif" alt="pat on the back">
+
+
+
+**What is happening here?**
+
+The way this works is pretty straight forward.
+
+Whenever you speak, Alexa will use voice recognition to convert your speech to text.
+
+It then sends it to Kinvey Chat — via the Kinvey Chat Proxy skill.
+
+Then Kinvey Chat runs its algorithms to decide on a response, which is sent back to Alexa.
+
+Finally, Alexa reads out loud the message and waits for the user response.
+
+## Speaking Challenges
+
+One of the trickiest challenges you will face is with voice recognition.
+
+There might be cases when your users will try to say things like: *"Pay now"*, while Alexa might understand it as *"Play now"*. This can be quite problematic, when your chatbot expects a specific item.
+
+To work around that, you should train your chatbot to understand different ways of saying the same thing — this includes different phrases, but also different words that sound similar — so that it would respond with the same action regardless of how someone might pronounce their commands.
+
+
+
+**Debugging conversations**
+
+In the case of this chatbot, a user could say: *"Check my balance"*, which Alexa might understand as *"Shake my balance"*. This is still close enough, so Kinvey Chat might accept it.
+
+<img src="./img/Shake-my-balance.png?raw=true" width="300">
+
+However, if you are struggling with some voice commands, you can investigate what messages are sent to Kinvey Chat, and how Kinvey Chat interpreted them. This will come especially useful, when you start using your chatbots outside of the Alexa Developer Console.
+
+In Kinvey Chat portal, navigate to the **History** tab. Find the conversation that was causing trouble and click on it.
+
+> hint: you can add a filter to show only conversations for specific dates, or for Alexa only.
+
+
+
+From here, you can see all the messages sent and received. If you click on the user input, you will see how this was interpreted by Kinvey Chat. In the case of *"Shake my balance"*, Kinvey Chat was 75% sure that you wanted to check your balance, so all is good.
+
+<img src="./img/Shake-my-balance-understanding.png?raw=true">
+
+To make it 100%, you would need to add *"Shake my balance"* to the Conversation training for **check-my-balance**.
 
 
 
@@ -666,9 +798,13 @@ Challenges:
 
 
 
-**Step 1** - Add top-up conversation
+### Conversation: Top up
 
-**Step 2** - Add buy-data conversation
+
+
+### Conversation: Buy data
+
+
 
 
 
