@@ -318,7 +318,7 @@ This will create a simple chatbot, with a couple of super basic conversations.
 
 
 
-**Testing**
+#### Testing
 
 To test it, press the **[Test]** button. Then when the chatbot loads:
 
@@ -341,7 +341,7 @@ Are you ready? Let's go.
 
 
 
-**Add a new conversation** 
+#### Add a new conversation
 
 In the **Cognitive Flow** tab (which is the tab you arrive by default), on the right hand side there is a list of all conversations in this project. Click on the **conversationTwo**, which will take you to that conversation.
 
@@ -366,7 +366,7 @@ Change `"conversation-name"` to `"check-my-balance"`.
 
 
 
-**Add a response message  to the convesration**
+#### Add a response message  to the conversation
 
 Next you need to add a **message** step to the conversation.
 
@@ -405,13 +405,13 @@ The `check-my-balance` conversation should look like this:
 
 
 
-**Here is how to do it:**
+#### Here is how to do it:
 
 <img src="./img/check-my-balance-1.gif?raw=true">
 
 
 
-**Train the chatbot to know when to use your new conversation**
+#### Train the chatbot to know when to use your new conversation
 
 Next, you need to train the chatbot to understand when to trigger this conversation.
 
@@ -428,7 +428,7 @@ Press the **[Save]** button.
 
 
 
-**Test**
+#### Test
 
 To test this new conversation, press the **[Test]** button, and type: *"Check my balance"*.
 
@@ -436,19 +436,19 @@ The chatbot should respond with your message.
 
 
 
-**Here is how to do it:**
+#### Here is how to do it:
 
 <img src="./img/check-my-balance-2.gif?raw=true">
 
 
 
-**Update the conversation to return the account status**
+#### Update the conversation to return the account status
 
 Now that you have the conversation working, it is time to change it so that it returns *real* data.
 
 
 
-**Update the conversation to call the API and print a message**
+#### Update the conversation to call the API and print a message
 
 Remove the message step, so that the `"steps": [ ]` array is empty.
 
@@ -546,7 +546,7 @@ The whole `check-my-balance` conversation should look like this:
 
 
 
-**Test**
+#### Test
 
 To test this new conversation, press the **[Test]** button, and type: *"What is my balance?"*.
 
@@ -554,13 +554,13 @@ The chatbot should respond with your message.
 
 
 
-**Here is how to do it:**
+#### Here is how to do it:
 
 <img src="./img/check-my-balance-3.gif?raw=true">
 
 
 
-**(Optional) Tidy up the initial messages**
+#### (Optional) Tidy up the initial messages
 
 Before you move on, it is a good idea to tidy up the initial messages.
 
@@ -626,7 +626,7 @@ Your `welcome` and `help` conversations should look like this:
 },
 ```
 
-**Test**
+#### Test
 
 To test this new configuration, press the **[Test]** button, and type: *"Hi"*.
 
@@ -642,7 +642,7 @@ All you need is a configured [Alexa Developer Console](https://developer.amazon.
 
 
 
-**Kinvey Chat Proxy skill**
+#### Kinvey Chat Proxy skill
 
 **Kinvey Chat Proxy** is a skill, which is designed to easily connect with your Kinvey Chat chatbots without having to publish a new skill. It works like a sandbox skill, which relays all messages from the user to the connected Kinvey Chat chatbot.
 
@@ -652,7 +652,7 @@ Alternatively, you can install it using the Alexa web interface. Log in to your 
 
 
 
-**Amazon Alexa Console**
+#### Amazon Alexa Console
 
 Next, you need to go to the [Alexa Developer Console](https://developer.amazon.com/alexa/console/ask) and open the Alexa Test simulator.
 
@@ -687,7 +687,9 @@ Finally, open the **Test** tab, and switch the skill testing from **Off** to **D
 
 
 
-Here, is a recording of how to do it:
+#### Here, is a recording of how to do it:
+
+> HERE SHOULD BE THE VIDEO FROM ./video/Alexa-new-skill.mp4
 
 <video>
   <source src="./video/Alexa-new-skill.mp4?raw=true">
@@ -695,7 +697,7 @@ Here, is a recording of how to do it:
 
 
 
-**Use proxy**
+#### Use proxy
 
 Now, to complete the loop, you just need to get the **proxy id** and pass it to the **Kinvey Chat Proxy** skill.
 
@@ -717,13 +719,15 @@ And voila, your chatbot is ready to listen and to speak back to you.
 
 
 
-Here, is a recording of how to do it:
+#### Here, is a recording of how to do it:
+
+> HERE SHOULD BE THE VIDEO FROM ./video/Connecting-Proxy-to-Alexa.mp4
 
 <video>
   <source src="./video/Connecting-Proxy-to-Alexa.mp4?raw=true">
 </video>
 
-**Talk to me**
+#### Talk to me
 
 There are two ways that you can interact your chatbots in **Alexa Developer Console**.
 
@@ -734,7 +738,7 @@ There are two ways that you can interact your chatbots in **Alexa Developer Cons
 
 
 
-**Test**
+#### Test
 
 To hear the welcome message, say: **"hi"**
 
@@ -750,7 +754,7 @@ Well done, you deserve a pat on the back:
 
 
 
-**What is happening here?**
+#### What is happening here?
 
 The way this works is pretty straight forward.
 
@@ -772,7 +776,7 @@ To work around that, you should train your chatbot to understand different ways 
 
 
 
-**Debugging conversations**
+#### Debugging conversations
 
 In the case of this chatbot, a user could say: *"Check my balance"*, which Alexa might understand as *"Shake my balance"*. This is still close enough, so Kinvey Chat might accept it.
 
