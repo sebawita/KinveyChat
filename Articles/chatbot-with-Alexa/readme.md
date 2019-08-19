@@ -634,6 +634,134 @@ The welcome message should be different
 
 
 
+#### The code
+
+The whole cognitive flow should look like this:
+
+```json
+{
+  "conversations": {
+    "welcome": {
+      "type": "support",
+      "steps": [
+        {
+          "type": "message",
+          "messages": [
+            "Welcome to the c-mobile self service."
+          ]
+        },
+        {
+          "type": "conversation",
+          "conversation": "help",
+          "conditions": [
+            "{{$not ($has conversation) }}"
+          ]
+        }
+      ]
+    },
+    "help": {
+      "type": "support",
+      "steps": [
+        {
+          "type": "message",
+          "messages": [
+            [
+              "Here is what I can do for you:"
+            ]
+          ],
+          "display": {
+            "type": "quick-reply",
+            "data": [
+              "Check My Balance",
+              "Top up",
+              "Buy more data"
+            ]
+          }
+        }
+      ]
+    },
+    "restart": {
+      "type": "support",
+      "steps": [
+        {
+          "type": "message",
+          "messages": [
+            "Your conversation is restarted."
+          ]
+        },
+        {
+          "type": "conversation",
+          "conversation": "welcome"
+        }
+      ]
+    },
+    "check-my-balance": {
+      "type": "goal",
+      "steps": [
+        {
+          "type": "webhook",
+          "entity": "status",
+          "data-source": {
+            "endpoint": "https://demoapis.com/cmobile/getAccountStatus/012345678"
+          },
+          "messages": [
+            [
+              "Let's have a look at your account. You have:",
+              "{{$currency status.balance 'USD'}}",
+              "{{status.minutes}} minutes, {{status.SMS}} text messages",
+              "and {{status.data}} left"
+            ]
+          ]
+        }
+      ]
+    },
+    "conversationOne": {
+      "type": "goal",
+      "steps": [
+        {
+          "type": "message",
+          "messages": [
+            "This is conversation 1"
+          ]
+        }
+      ]
+    },
+    "conversationTwo": {
+      "type": "goal",
+      "steps": [
+        {
+          "type": "message",
+          "messages": [
+            "This is conversation 2"
+          ]
+        }
+      ]
+    }
+  },
+  "settings": {
+    "invalid-replies": [
+      "I am not sure I understood what you said."
+    ],
+    "general-failure": [
+      "We are experiencing technical difficulties at this moment."
+    ],
+    "previous-conversation-messages": [
+      "I am going back to the {{ conversationDisplayName }} now."
+    ]
+  },
+  "commands": {
+    "NEXT-PAGE": [
+      "Next 5"
+    ],
+    "RESTART": [
+      "restart"
+    ]
+  }
+}
+```
+
+
+
 ### Step 3 — Connect with the Alexa Console
 
 Now that you have a working chatbot, it is time to start talking to it with actual voice commands. The best thing is that you don't even need an Alexa device to do that.
