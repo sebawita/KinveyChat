@@ -808,7 +808,7 @@ Finally, open the **Test** tab, and switch the skill testing from **Off** to **D
 
 **Here is how to do it:**
 
-> HERE SHOULD BE THE VIDEO FROM ./video/Alexa-new-skill.mp4
+> HERE SHOULD BE THE VIDEO FROM [./video/Alexa-new-skill.mp4](https://github.com/sebawita/KinveyChat/blob/master/Articles/chatbot-with-Alexa/video/Alexa-new-skill.mp4?raw=true)
 
 <video>
   <source src="./video/Alexa-new-skill.mp4?raw=true">
@@ -840,7 +840,7 @@ And voila, your chatbot is ready to listen and to speak back to you.
 
 **Here is how to do it:**
 
-> HERE SHOULD BE THE VIDEO FROM ./video/Connecting-Proxy-to-Alexa.mp4
+> HERE SHOULD BE THE VIDEO FROM [./video/Connecting-Proxy-to-Alexa.mp4](https://github.com/sebawita/KinveyChat/blob/master/Articles/chatbot-with-Alexa/video/Connecting-Proxy-to-Alexa.mp4?raw=true)
 
 <video>
   <source src="./video/Connecting-Proxy-to-Alexa.mp4?raw=true">
