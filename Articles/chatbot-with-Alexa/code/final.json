@@ -1,0 +1,251 @@
+{
+  "conversations": {
+    "welcome": {
+      "type": "support",
+      "steps": [
+        {
+          "type": "message",
+          "messages": [
+            "Welcome to the c-mobile self service."
+          ]
+        },
+        {
+          "type": "conversation",
+          "conversation": "help",
+          "conditions": [
+            "{{$not ($has conversation) }}"
+          ]
+        }
+      ]
+    },
+    "help": {
+      "type": "support",
+      "steps": [
+        {
+          "type": "message",
+          "messages": [
+            [
+              "Here is what I can do for you:"
+            ]
+          ],
+          "display": {
+            "type": "quick-reply",
+            "data": [
+              "Check My Balance",
+              "Top up",
+              "Buy more data"
+            ]
+          }
+        }
+      ]
+    },
+    "restart": {
+      "type": "support",
+      "steps": [
+        {
+          "type": "message",
+          "messages": [
+            "Your conversation is restarted."
+          ]
+        },
+        {
+          "type": "conversation",
+          "conversation": "welcome"
+        }
+      ]
+    },
+    "check-my-balance": {
+      "type": "goal",
+      "steps": [
+        {
+          "type": "webhook",
+          "entity": "status",
+          "data-source": {
+            "endpoint": "https://demoapis.com/cmobile/getAccountStatus/012345678"
+          }
+        },
+        {
+          "type": "message",
+          "messages": [
+            [
+              "Let's have a look at your account. You have:"
+            ]
+          ],
+          "display": {
+            "type": "quick-reply",
+            "data": [
+              "{{$currency status.balance 'USD'}}",
+              "{{status.minutes}} minutes",
+              "{{status.SMS}} text messages",
+              "{{status.data}}"
+            ]
+          }
+        }
+      ]
+    },
+    "check-my-balance-2": {
+      "type": "goal",
+      "steps": [
+        {
+          "type": "webhook",
+          "entity": "status",
+          "data-source": {
+            "endpoint": "https://demoapis.com/cmobile/getAccountStatus/012345678"
+          },
+          "messages": [
+            [
+              "Let's have a look at your account. You have:",
+              "{{$currency status.balance 'USD'}}",
+              "{{status.minutes}} minutes, {{status.SMS}} text messages",
+              "and {{status.data}} left"
+            ]
+          ]
+        },
+        {
+          "type": "message",
+          "messages": [
+            [
+              "Would you like to :"
+            ]
+          ],
+          "display": {
+            "type": "quick-reply",
+            "data": [
+              "Top up",
+              "Buy more data"
+            ]
+          }
+        }
+      ]
+    },
+    "top-up": {
+      "type": "goal",
+      "steps": [
+        {
+          "type": "question",
+          "entity": "top-up-value",
+          "entity-type": "Number",
+          "messages": [
+            "How much would you like to top up?"
+          ],
+          "reactions": {
+            "acknowledgements": [
+              "I understand that you want to top up {{$currency top-up-value 'USD'}}"
+            ]
+          }
+        },
+        {
+          "type": "question",
+          "entity": "card",
+          "entity-type": "Number",
+          "is-explicit": true,
+          "messages": [
+            "Which card would you like to use? "
+          ],
+          "display": {
+            "type": "quick-reply",
+            "data-source": {
+              "endpoint": "https://demoapis.com/cmobile/availableCards/012345678"
+            },
+            "template": "ending **{{card}}"
+          },
+          "reactions": {
+            "validations": [
+              {
+                "type": "custom",
+                "parameters": {
+                  "data-source": {
+                    "endpoint": "https://demoapis.com/cmobile/availableCards/012345678",
+                    "selector": "$[:].val"
+                  },
+                  "condition": "{{$in card _response}}"
+                },
+                "error-message": [
+                  "Card number {{card}} not found on the system."
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "type": "confirmation",
+          "entity": "top-up-confirmation",
+          "messages": [
+            "Just to confirm. Do you want to top up {{$currency top-up-value 'USD'}} with the card ending with {{card}}?"
+          ]
+        },
+        {
+          "type": "message",
+          "messages": [
+            "Top up has been cancelled"
+          ],
+          "conditions": [
+            "{{$not top-up-confirmation}}"
+          ]
+        },
+        {
+          "type": "webhook",
+          "entity": "topped-up-account",
+          "data-source": {
+            "endpoint": "https://demoapis.com/cmobile/topUp/012345678?val={{top-up-value}}"
+          },
+          "messages": [
+            "Your new balance is {{$currency topped-up-account.balance 'USD'}}"
+          ],
+          "conditions": [
+            "{{top-up-confirmation}}"
+          ]
+        }
+      ]
+    },
+    "buy-data": {
+      "type": "goal",
+      "steps": [
+        {
+          "type": "question",
+          "entity": "data-pack",
+          "entity-type": "DataPack",
+          "messages": [
+            "Which data pack would you like?"
+          ],
+          "display": {
+            "type": "quick-reply",
+            "data-source": {
+              "endpoint": "https://demoapis.com/cmobile/dataPackages"
+            },
+            "template": "{{name}} {{data}} for {{$currency price 'USD'}}"
+          }
+        },
+        {
+          "type": "webhook",
+          "entity": "buy-data-response",
+          "data-source": {
+            "endpoint": "https://demoapis.com/cmobile/buyData/012345678?dataPack={{data-pack}}"
+          },
+          "messages": [
+            "Your purchase is complete. You now have {{buy-data-response.data}}. Your balance is {{$currency buy-data-response.balance 'USD'}}"
+          ]
+        }
+      ]
+    }
+  },
+  "settings": {
+    "invalid-replies": [
+      "I am not sure I understood what you said."
+    ],
+    "general-failure": [
+      "We are experiencing technical difficulties at this moment."
+    ],
+    "previous-conversation-messages": [
+      "I am going back to the {{ conversationDisplayName }} now."
+    ]
+  },
+  "commands": {
+    "NEXT-PAGE": [
+      "Next 5"
+    ],
+    "RESTART": [
+      "restart"
+    ]
+  }
+}
