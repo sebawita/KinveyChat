@@ -8,15 +8,11 @@ Voice chatbots are not only popular because of the convenience of talking to a d
 
 In this article, you will learn how to build your own voice assistant. You will use [Kinvey Chat](https://www.progress.com/kinvey/chat) to build an **Alexa skill** in a few easy steps.
 
-
-
 ## Scenarios
 
 To build something worthwhile we need a *"real"* customer and a set of *"real"* scenarios.
 
 A telecommunications company called **C-Mobile** provides various services to its customers. They identified a need to assist their pay-as-you-go customers with various services around topping up their accounts and buying data packages.
-
-
 
 ### Scenario #1 — check my balance
 
@@ -24,23 +20,17 @@ As a customer, I want to be able to ask my Alexa device to check my balance.
 
 Alexa should respond with the amount of credit I have left on my account together with the remaining minutes, texts and data.
 
-
-
 ### Scenario #2 — top-up
 
 As a customer, I want to be able to top up my account.
 
 Alexa should guide me through the required steps, provide with a list of options, and at the end provide the updated credit on the account.
 
-
-
 ### Scenario #3 — buy a data package
 
 As a customer, I want to be able to buy additional data packages.
 
 Alexa should guide me through the required steps, provide me with a list of data packages, which should be paid for with the credits on the account.
-
-
 
 ### Assumptions / simplification of the scenario
 
@@ -90,8 +80,6 @@ Here is an example of how to get the account balance for id **012345678**
 }
 ```
 
-
-
 ### topUp
 
 `topUp` allows you to top up your account balance, as a result, the balance will increase and you will receive an updated account status.
@@ -127,8 +115,6 @@ Here is an example of how to top the account id **012345678** with **10** credit
 }
 ```
 
-
-
 ### availableCards/:id
 
 `availableCads` allows you to look up all associated payment cards with the account.
@@ -162,8 +148,6 @@ Here is an example of how to check what payment cards are associated with the ac
 ]
 ```
 
-
-
 ### resetAccount
 
 `resetAccount` allows you to reset your account. This can come useful when you want to start from scratch.
@@ -193,8 +177,6 @@ Here is an example of how to reset the account id **012345678**.
   "data": "29 MB"
 }
 ```
-
-
 
 ### dataPackages
 
@@ -247,8 +229,6 @@ Here is an example of how to view available data packages.
 ]
 ```
 
-
-
 ### buyData
 
 `buyData` allows you to purchase more data for your account. As a result, more data will be added to the account, and the price of the package will be deducted from the balance.
@@ -281,16 +261,12 @@ Here is an example of how to buy a **medium** data pack for the account id **012
 }
 ```
 
-
-
 ## The flow of the tutorial
 
 We will tackle this project in two rounds.
 
 - **Phase 1** — Getting Started — You will build a smart part of the conversation (scenario: *Check my balance* ) and then test it as part of an Alexa skill. This part focuses mostly on making sure that your environment is set up correctly, and on getting some response from an Alexa Skill.
 - **Phase 2** — Add more conversations — You will add the remaining conversations. This part focuses more on managing the conversation flow and completing the provided scenarios.
-
-
 
 ## Phase 1 — Getting started
 
@@ -301,8 +277,6 @@ The getting started is as simple as 1,2,3, which can be done in these really eas
 First, you need to sign in to [Kinvey Chat Console](https://bots.kinvey.com/). 
 
 >  If you don't have an account yet, you can create it [here](https://console.kinvey.com/sign-up). Don't worry, you can get started for free.
-
-
 
 After you sign in you can create a new chatbot. <br />Press the **[+ New bot]** button:
 
@@ -318,8 +292,6 @@ Press the **[Create]** button.
 
 This will create a simple chatbot, with a couple of super basic conversations.
 
-
-
 #### Testing
 
 To test it, press the **[Test]** button. Then when the chatbot loads:
@@ -329,19 +301,13 @@ To test it, press the **[Test]** button. Then when the chatbot loads:
 - click one of the buttons or type: **Conversation 1**
 - the chatbot should respond with something like: *This is conversation 1*
 
-
-
 ### Step 2 — Create your first conversation — check my balance
 
 Now that you have a working chatbot, it is time for you to implement the first conversation, which is for the **check my balance** scenario.
 
 When the user says *"Check my balance"*, the chatbot should call the `getAccountStatus` function, and then print out the message with the status returned from the API.
 
-
-
 Are you ready? Let's go.
-
-
 
 #### Add a new conversation
 
@@ -362,19 +328,13 @@ Select the `conversation-goal` snippet and press enter. This should output the f
 }
 ```
 
-
-
 Change `"conversation-name"` to `"check-my-balance"`.
-
-
 
 #### Add a response message  to the conversation
 
 Next, you need to add a **message** step to the conversation.
 
 > Hint: If you press **tab**, the cursor will jump inside the `steps[ ]` array.
-
-
 
 From inside the `steps[ ]` array, start typing `step` (or `stme` for *step message*) and select the `step-message` snippet. This should produce the following code:
 
@@ -405,13 +365,9 @@ The `check-my-balance` conversation should look like this:
 }
 ```
 
-
-
 **Here is how to do it:**
 
 <img src="./img/check-my-balance-1.gif?raw=true">
-
-
 
 #### Train the chatbot to know when to use your new conversation
 
@@ -428,27 +384,19 @@ Add the following `expressions` — this how you tell the chatbot engine when to
 
 Press the **[Save]** button.
 
-
-
 #### Test
 
 To test this new conversation, press the **[Test]** button and type: **Check my balance**
 
 The chatbot should respond with your message.
 
-
-
 **Here is how to do it:**
 
 <img src="./img/check-my-balance-2.gif?raw=true">
 
-
-
 #### Update the conversation to return the account status
 
 Now that you have the conversation working, it is time to change it so that it returns *real* data.
-
-
 
 #### Update the conversation to call the API and print a message
 
@@ -469,8 +417,6 @@ Finally, you need to add a `"messages"` property to this step, which will contai
   "Let's have a look at your account. You have {{status.balance}} dollars left."
 ]
 ```
-
-
 
 > Hint: You could also, make the response multiline — which is not very important with voice chatbots, as chatbots tend to read the whole output, as one line, but it looks better when we test it in the console.
 >
@@ -504,8 +450,6 @@ Finally, you need to add a `"messages"` property to this step, which will contai
 >
 > This will result in all of the lines printed (or spoken).
 
-
-
 Here are `messages` containing all of the data returned from the `getAccountStatus` API call:
 
 ```
@@ -518,8 +462,6 @@ Here are `messages` containing all of the data returned from the `getAccountStat
   ]
 ]
 ```
-
-
 
 The whole `check-my-balance` conversation should look like this:
 
@@ -546,21 +488,15 @@ The whole `check-my-balance` conversation should look like this:
 }
 ```
 
-
-
 #### Test
 
 To test this new conversation, press the **[Test]** button and type: *What is my balance?*
 
 The chatbot should respond with your message.
 
-
-
 **Here is how to do it:**
 
 <img src="./img/check-my-balance-3.gif?raw=true">
-
-
 
 #### (Optional) Tidy up the initial messages
 
@@ -571,8 +507,6 @@ Your chatbot project has 3 support conversations:
 - `welcome` — this conversation is triggered when you start talking with your chatbot. This conversation triggers the `help` conversation.
 - `help` — this conversation is triggered when the chatbot believes that you might need help
 - `restart` — this conversation is triggered when you type/say *"restart"*. This conversation triggers the `welcome` conversation
-
-
 
 **Update the welcome message**
 
@@ -628,15 +562,11 @@ Your `welcome` and `help` conversations should look like this:
 },
 ```
 
-
-
 #### Test
 
 To test this new configuration, press the **[Test]** button and type: **Hi**
 
 The welcome message should be different 
-
-
 
 #### Remove Conversations One/Two
 
@@ -751,15 +681,11 @@ The whole cognitive flow should look like this:
 }
 ```
 
-
-
 ### Step 3 — Connect with the Alexa Console
 
 Now that you have a working chatbot, it is time to start talking to it with actual voice commands. The best thing is that you don't even need an Alexa device to do that.
 
 All you need is a configured [Alexa Developer Console](https://developer.amazon.com/alexa/console/ask) and the [Kinvey Chat Proxy skill](https://alexa.amazon.co.uk/spa/index.html?#skills/dp/B07W4QRF28).
-
-
 
 #### Kinvey Chat Proxy skill
 
@@ -769,8 +695,6 @@ Go to your Alexa app, find and install the **Kinvey Chat Proxy** skill.
 
 Alternatively, you can install it using the Alexa web interface. Log in to your Amazon account from the [US Portal](https://alexa.amazon.com/), [UK Portal]( https://alexa.amazon.co.uk/) (or your country-specific portal). Then go to **Skills**, find and install the **Kinvey Chat Proxy** skill.
 
-
-
 #### Amazon Alexa Console
 
 Next, you need to go to the [Alexa Developer Console](https://developer.amazon.com/alexa/console/ask) and open the Alexa Test simulator.
@@ -778,8 +702,6 @@ Next, you need to go to the [Alexa Developer Console](https://developer.amazon.c
 To open the simulator you need to use an Alexa skill. If you already have one, you can just go to the **Test** tab and you are good to go.
 
 If you don't have an Alexa skill yet, here is what you need to do:
-
-
 
 In the [Alexa Developer Console](https://developer.amazon.com/alexa/console/ask), press the **Create Skill** button.
 
@@ -804,8 +726,6 @@ Then, press the **Build Model** button and wait for a little bit.
 
 Finally, open the **Test** tab, and switch the skill testing from **Off** to **Development**.
 
-
-
 **Here is how to do it:**
 
 > HERE SHOULD BE THE VIDEO FROM [./video/Alexa-new-skill.mp4](https://github.com/sebawita/KinveyChat/blob/master/Articles/chatbot-with-Alexa/video/Alexa-new-skill.mp4?raw=true)
@@ -813,8 +733,6 @@ Finally, open the **Test** tab, and switch the skill testing from **Off** to **D
 <video>
   <source src="./video/Alexa-new-skill.mp4?raw=true">
 </video>
-
-
 
 #### Use proxy
 
@@ -836,8 +754,6 @@ Then, paste the **proxy command** and press enter.
 
 And voila, your chatbot is ready to listen and to speak back to you.
 
-
-
 **Here is how to do it:**
 
 > HERE SHOULD BE THE VIDEO FROM [./video/Connecting-Proxy-to-Alexa.mp4](https://github.com/sebawita/KinveyChat/blob/master/Articles/chatbot-with-Alexa/video/Connecting-Proxy-to-Alexa.mp4?raw=true)
@@ -855,23 +771,17 @@ There are two ways that you can interact your chatbots in **Alexa Developer Cons
 
 > Note, if you reload the Alexa Developer Console page, or close it and open it again, then the console will disconnect from the Kinvey Chat Proxy skill. All you need to do is say: *"Kinvey Chat Proxy"*, and you will be back where you left it (no need to provide the Proxy ID again).
 
-
-
 #### Test
 
 To hear the welcome message, say: **"hi"**
 
 Then say: **"Check my balance"**
 
-
-
 And just like that, you have just talked to your first Kinvey Chat chatbot through an Alexa skill.
 
 Well done, you deserve a pat on the back:
 
 <img src="https://media.giphy.com/media/cLYubXxF0P55MO1IUY/giphy.gif" alt="pat on the back">
-
-
 
 #### What is happening here?
 
@@ -893,8 +803,6 @@ There might be cases when your users will try to say things like: *"Pay now"*, w
 
 To work around that, you should train your chatbot to understand different ways of saying the same thing — this includes different phrases, but also different words that sound similar — so that it would respond with the same action regardless of how someone might pronounce their commands.
 
-
-
 #### Debugging conversations
 
 In the case of this chatbot, a user could say: *"Check my balance"*, which Alexa might understand as *"Shake my balance"*. This is still close enough, so Kinvey Chat might accept it.
@@ -907,15 +815,11 @@ In Kinvey Chat portal, navigate to the **History** tab. Find the conversation th
 
 > hint: you can add a filter to show only conversations for specific dates, or Alexa only.
 
-
-
 From here, you can see all the messages sent and received. If you click on the user input, you will see how this was interpreted by Kinvey Chat. In the case of *"Shake my balance"*, Kinvey Chat was 75% sure that you wanted to check your balance, so all is good.
 
 <img src="./img/Shake-my-balance-understanding.png?raw=true">
 
 To make it 100%, you would need to add *"Shake my balance"* to the Conversation training for **check-my-balance**.
-
-
 
 ## Finishing off the app
 
@@ -960,8 +864,6 @@ Start typing `con`, and select the `conversation-goal` snippet and press enter.
 
 Change `"conversation-name"` to `"top-up"`.
 
-
-
 **Add a sample step**
 
 Then, just to see that the conversation works, you should add a sample message step.
@@ -969,8 +871,6 @@ Then, just to see that the conversation works, you should add a sample message s
 In the `steps` array, start typing `step` and select the `step-message` snippet.
 
 Set the message to `"top-up works"`.
-
-
 
 The conversation should look like this:
 
@@ -988,8 +888,6 @@ The conversation should look like this:
 }
 ```
 
-
-
 **Train the chatbot to know when to use your new conversation**
 
 Finally, train the chatbot to understand when to trigger this conversation.
@@ -1005,8 +903,6 @@ Add the following expressions:
 
 Press the **[Save]** button.
 
-
-
 **Test**
 
 To test this, go to **Alexa Developer Console**, and say **Top up** or **Add more funds**
@@ -1017,21 +913,15 @@ Alexa should respond with your message.
 >
 > If Alexa doesn't understand your expressions, like when you say *"top up"* it might understand it as *"top pop"* then you can add this expression to the training.
 
-
-
 > **Note #2**
 >
 > You should be able to continue to use your chatbot through the proxy app. But if not just say "Kinvey Chat Proxy".
-
-
 
 ### Implement the conversation
 
 Now, that you have the `top-up` conversation wired up, it is time to implement it with the proper logic.
 
 Note, you should test the conversation each time you add a new step.
-
-
 
 **Clean up**
 
@@ -1045,8 +935,6 @@ Start by removing the sample message step, so that the `steps` array is empty, l
   ]
 }
 ```
-
-
 
 #### Ask for top-up-value
 
@@ -1066,8 +954,6 @@ You should be presented with the following code:
   ]
 }
 ```
-
-
 
 Here is what his all means:
 
@@ -1093,8 +979,6 @@ Your step should look like this:
 
 Press the **[Save]** button and test.
 
-
-
 **Test**
 
 Now, when you say:
@@ -1105,8 +989,6 @@ Now, when you say:
 Alexa will not say anything after you provide the answer.
 
 Don't worry, that is OK, as you don't need to confirm the answers provided to the chatbot questions.
-
-
 
 **Adding a reaction**
 
@@ -1139,8 +1021,6 @@ Now, when you say: **"Top up twenty five"**
 
 Alexa should respond with: **"I understand that you want to top up $25.00"**
 
-
-
 **The full step should look like this:**
 
 ```json
@@ -1159,15 +1039,11 @@ Alexa should respond with: **"I understand that you want to top up $25.00"**
 },
 ```
 
-
-
 #### Ask for the card number
 
 The next step should be to ask the user to provide the payment card they want to use.
 
 In the case of the c-mobile API, you only need to provide the last 4 digits of the card, which is already stored in the system. You can see all available cards by calling: [https://demoapis.com/cmobile/availableCards/012345678](https://demoapis.com/cmobile/availableCards/012345678).
-
-
 
 Go to the **Cognitive Flow** tab, and find the end of the `top-up-value` question step.
 
@@ -1212,8 +1088,6 @@ Now try to say:
 - **"Top up 20"**
 - **"use card ending 1234"**
 
-
-
 **Alexa truncating leading zeroes**
 
 Note, when you tell Alexa a number that starts with leading zeroes, Alexa will skip these digits.
@@ -1222,8 +1096,6 @@ For example, input: **Use card 0020**, will be captured as **Use card 20**.
 
 Make sure to be aware of this behaviour, so that when you expect a 4 digits card or PIN, and if you receive less, you should be safe to assume that the missing digits are zeroes.
 
-
-
 **(Optional) Validation**
 
 If you would like to make this conversation more robust and make sure that the user always provides a card number that is actually stored on the system, you could use a validation.
@@ -1231,8 +1103,6 @@ If you would like to make this conversation more robust and make sure that the u
 There are various types of validations, which allow you to validate that a provided value is a telephone number, or that it matches a specific regular expression, and many more. You can read all about validation rules in the [docs](https://docs.nativechat.com/docs/1.0/cognitive-flow/validation.html).
 
 The validation that you need to use in this scenario is a `custom` `webhook` validation. This validation allows you to execute a query, then validate that the entity value matches the `_response` returned from the query.
-
-
 
 Add the following code after the `display` section:
 
@@ -1298,8 +1168,6 @@ Here is how to understand this code:
 
 - `error-message`: the error message, you can use `{{card}}` to tell the user what card number doesn't seem to work.
 
-
-
 Press the **[Save]** button and test.
 
 **Test**
@@ -1311,8 +1179,6 @@ Now try to say:
   - the chatbot should respond with an error message, and ask for input again
 - **"use card ending** <u>[correct number]</u>**"**
   - the chatbot should continue
-
-
 
 **The full step should look like this:**
 
@@ -1352,8 +1218,6 @@ Now try to say:
 }
 ```
 
-
-
 #### Ask to confirm the values
 
 Before, the chatbot performs the top-up operation, it should ask the user to confirm the **top-up-value** and the **card**.
@@ -1388,8 +1252,6 @@ Now try to say:
   - the chatbot should ask the confirmation question including the `top-up-value` and the `card` number.
 - **"Yes"**
 
-
-
 **The full step should look like this:**
 
 ```json
@@ -1402,8 +1264,6 @@ Now try to say:
 }
 ```
 
-
-
 #### Display cancelation message
 
 If the user rejects the confirmation, then the chatbot should respond with a message confirming the choice.
@@ -1413,8 +1273,6 @@ This can be done by simply adding a new message step.
 However, you want this step to only trigger when `top-up-confirmation` is `false`. This can be done with the help of the `conditions` property.
 
 You can learn more about **Conditions** in the [docs](https://docs.nativechat.com/docs/1.0/cognitive-flow/conditions.html).
-
-
 
 Add a new message step at the end of the conversation, start typing `stme` and select the `step-message` snippet.
 
@@ -1436,8 +1294,6 @@ Start the chat, and say **"No"** when you get asked to confirm.
 
 The chatbot should respond with the cancellation message.
 
-
-
 **The full step should look like this:**
 
 ```json
@@ -1452,8 +1308,6 @@ The chatbot should respond with the cancellation message.
 },
 ```
 
-
-
 #### Execute the top-up
 
 The final step is to execute the top-up call, by calling the cmobile API `topUp` function.
@@ -1461,8 +1315,6 @@ The final step is to execute the top-up call, by calling the cmobile API `topUp`
 This operation can be done with a **Webhook** step.
 
 However, once again you don't want this step to be executed every time. You want this step to be executed when `top-up-confirmation` is `true`.
-
-
 
 Add a new **Webhook** step at the end of the conversation, start typing `stwe` and select the `step-webhook` snippet. The snippet should look like this:
 
@@ -1481,8 +1333,6 @@ Add a new **Webhook** step at the end of the conversation, start typing `stwe` a
   }
 }
 ```
-
-
 
 **Data Source**
 
@@ -1528,8 +1378,6 @@ Add a `messages` property with the following message (it is best to add it below
 ]
 ```
 
-
-
 **The full step should look like this:**
 
 ```json
@@ -1555,8 +1403,6 @@ Press the **[Save]** button and test.
 Go through the chat conversation, and say **"Yes"** when you get asked to confirm.
 
 The chatbot should execute the **Top-Up** API call and respond with updated balance value. It should be increased by the amount specified in the first step.
-
-
 
 ### The code
 
@@ -1645,8 +1491,6 @@ The whole **top-up** conversation should look like this:
 }
 ```
 
-
-
 ## Conversation: Buy data
 
 In this conversation the chatbot should:
@@ -1666,15 +1510,11 @@ For this conversation, you should use the following API calls:
 
 > **Reminder:** to avoid conflicting with other people using this API, please use a different account id to the one used in the example (012345678).
 
-
-
-
-
 ### Adding a new conversation
 
 First, you need to create a new conversation called `buy-data`, which is done just like you did it with the `top-up`.
 
-#### Add check-my-balance
+#### Add buy-data
 
 Go to the **Cognitive Flow** tab, and find the end of the  `"top-up"` code.
 
@@ -1685,8 +1525,6 @@ Start typing `con`, and select the `conversation-goal` snippet and press enter.
 Change `"conversation-name"` to `"buy-data"`.
 
 This time leave the `"steps"` array empty.
-
-
 
 **Train the chatbot to know when to use your new conversation**
 
@@ -1702,8 +1540,6 @@ Add the following expressions:
 - *Add data*
 
 Press the **[Save]** button.
-
-
 
 ### Adding DataPack entity
 
@@ -1731,27 +1567,19 @@ If everything looks fine, then press the **[Create]** button.
 
 Kinvey Chat will pull the data, and train the data model to understand the values for **DataPack**.
 
-
-
 ### Implement the conversation
 
 Now, that you have the `buy-data` conversation wired up, and a data model for **DataPack**, it is time to implement the logic.
 
-
-
 #### Ask for data-pack
 
 The first step should be to provide the user with the list of available data packs and ask them to select one.
-
-
 
 In the `steps` array, start typing `stq` and select the `step-question` snippet. Set:
 
 - the `entity` to **data-pack**
 - the `entity-type` to **DataPack**
 - the `messages` to **"Which data pack would you like?"**
-
-
 
 At this point, your code should look like this:
 
@@ -1767,8 +1595,6 @@ At this point, your code should look like this:
 ```
 
 Which should be enough to let the user choose a Data Pack, however, we should let user what Data Packs are available.
-
-
 
 **Provide possible values**
 
@@ -1787,8 +1613,6 @@ After the `messages` array, add a comma and then add the following code:
 ```
 
 Press the **[Save]** button and test.
-
-
 
 **The full step should look like this:**
 
@@ -1810,15 +1634,11 @@ Press the **[Save]** button and test.
 },
 ```
 
-
-
 #### Execute the buy data
 
 The final step is to execute the buy data call, by calling the cmobile API `buyData` function.
 
 This operation can be done with a **Webhook** step. Add a new **Webhook** step at the end of the conversation, start typing `stwe` and select the `step-webhook` snippet. 
-
-
 
 **Data Source**
 
@@ -1831,8 +1651,6 @@ Then update the `endpoint` to call the `buyData` API function and pass `data-pac
   "endpoint": "https://demoapis.com/cmobile/buyData/012345678?dataPack={{data-pack}}"
 },
 ```
-
-
 
 **Confirmation message**
 
@@ -1853,8 +1671,6 @@ Add a `messages` property with the following message (it is best to add it below
   "Your purchase is complete. You now have {{buy-data-response.data}}. Your balance is {{$currency buy-data-response.balance 'USD'}}"
 ]
 ```
-
-
 
 **The full step should look like this:**
 
@@ -1920,9 +1736,9 @@ The whole **buy-data** conversation should look like this:
 }
 ```
 
-
-
 ## Congratulations
+
+<img src="https://media.giphy.com/media/3oz8xAFtqoOUUrsh7W/giphy.gif">
 
 And just like that, you have created a fully functioning Alexa Skill. It can communicate using Natural Language Processing, communicate with the cmobile API to provide the users with the ability to check their account status, top up and buy more data.
 
