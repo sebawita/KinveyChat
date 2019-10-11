@@ -311,6 +311,8 @@ We don't need a question step to test if an Entity Type works.
 The chatbot engine always makes an attempt to match to any of the available Entity Types.
 
 You can easily test the following expressions by typing them in the test console:
+
+<!--add an explanation on how to test this `Test Undersanding` in the **Test Tab**-->
  
 * *EVA1093FR* => should match: EVA1093FR
 * *My license is MAT1001UK* => should match: MAT1001UK
